@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../Design/StudentStyle.css" >
 </head>
 <body>
+    <div class="Header"> Studnet Registration Home </div>
+    <div class="topnav">
+        <a href="https://www.aiub.edu/"> AIUB Website </a>
+    </div>
     <h1> Student Registration Page </h1>
     <form>
         <label for ="StudentName">Student Name: </label>
@@ -26,13 +30,14 @@
 
         <label for = "Doctor"> Select Department: </label>
         <select>
+            <option values ="Default">None</option>
             <option values ="CSE">CSE</option>
             <option values ="EEE">EEE</option>
             <option values ="IPE">IPE</option>
         </select>
         <br><br>
         <label for ="StudentId">Student Id: </label>
-        <input type="text" id = "StudentId" name = "StudentId">
+        <input type="text" id = "StudentId" name = "StudentId" placeholder="Enter Your ID">
         <br><br>
 
 

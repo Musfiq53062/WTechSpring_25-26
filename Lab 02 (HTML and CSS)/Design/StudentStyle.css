@@ -1,3 +1,53 @@
 body{
     background-color:beige
 }
+h1{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+    color: rgb(75, 57, 57);
+    text-align: center;
+}
+form {
+    width: 550px;
+    margin:70px;
+    padding:50px;
+    background-color: rgb(247, 223, 182);
+}    
+label {
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgb(105, 84, 84);
+} 
+#StudentName, #StudentCGPA, #StudentId, #GenderMale, #GenderFemale, #Doctor, #DOB, #Address, #StudentEmail, #Insertfile, #checkbox, #PhoneNumber, #Submit{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    border: 5px solid rgb(67, 44, 44);
+    background-color:azure;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
+}  
+div.Header, div.topnav{
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    border: 5px solid rgb(67, 44, 44);
+    border-radius: 10px;
+    background-color: rgb(206, 206, 142);
+    font-size: 25px;    
+}
+*{
+    text-align: left;
+    color:rgb(110, 74, 43);
+}
+input[type="text"], input[type="number"],select, input[type="email"], input[type="file"], input[type="checkbox"], input[type="submit"]{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 10px;
+    margin: 5px;
+    font-style: normal;
+} 
+textarea{
+    max-width: 500px;
+    min-width: 200px;
+    resize:horizontal;
+}                                             
