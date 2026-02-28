@@ -1,66 +1,53 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang ='eng'>
 
-<title>Student Registration Form</title>
+<title>Patient Registration Form</title>
 
-<head>
-    <h1> Student Registration Page </h3> 
+<head> 
+    <h1> Patient Registration Form (admission)</h1>
 </head>
 <form>
 
-<label for ="StudentName">Student Name: </label>
-<input type="text" id = "StudentName" name = "StudentName" placeholder="Enter Your Name">
+<label for ="PatientName">Patient Name: </label>
+<input type ="text" id="PatientName" name="PatientName" placeHolder="Enter the Name">
 <br><br>
 
-<label for ="StudentCGPA">Student CGPA: </label>
-<input type="number" id = "StudentCGPA" name = "StudentCGPA" step="any" placeholder="Enter Your CGPA">
-<br><br>
-<label for ="GenderMale"> Male </label>
-<input type = "radio" id ="GenderMale" name="Gender" value ="Male">
+<label for = "Age">Patient Age: </label>
+<input type ="number" id="Age" name ="Age">
 <br><br>
 
-<label for ="GenderFemale"> Female </label>
-<input type = "radio" id ="GenderFemale" name="Gender" value ="Female">
+<label for = "DOB">Date of Birth: </label>
+<input type ="date" id="DOB" name ="DOB">
 <br><br>
 
-<label for = "Doctor"> Select Department: </label>
+<input type ="radio" id="GenderMale" name ="Gender" value="Male">
+<label for = "Gender"> Male </label>
+
+<input type ="radio" id="GenderFemale" name ="Gender" value="Female">
+<label for = "Gender"> Female </label>
+<br><br>
+
+<label for="Address">Patient Address: </label>
+<textarea id = "Address" name="PatientAddress" rows="4" cols ="20" placeholder=" enter your address"></textarea>
+<br><br>
+
+<label for="Insertfile">Patient previous medical doc: </label>
+<input type="file" id ="file" name="file">
+<br><br>
+
+<label for="Dept">Choose Department: </label>
 <select>
-    <option values ="CSE">CSE</option>
-    <option values ="EEE">EEE</option>
-    <option values ="IPE">IPE</option>
+    <option values="Default"></option>
+    <option values="Skin">Skin Department</option>
+    <option values="Medicine">Medicine Department</option>
+    <option values="ENT">ENT Department</option>
+    <option values="Cardiology">Cardiology Department</option>
 </select>
 <br><br>
-<label for ="StudentId">Student Id: </label>
-<input type="text" id = "StudentId" name = "StudentId">
-<br><br>
 
-<label for="Address">Address: </label>
-<textarea id ="Address" name ="StudentAddress" rows="4" cols="20" placeholder="Enter your ddress here"></textarea>
-<br><br>
+<input type="Submit" id="submit" name="submit" value="LogIn">
+<input type="button" id ="reset" name ="reset" value ="Reset ">
 
-<label for ="DOB"> Date of Birth: </label>
-<input type ="date" id ="DOB" name = "StudentDOB">
-<br><br>
-
-<label for ="StudentEmail">Email: </label>
-<input type="text" id = "StudentEmail" name = "StudentEmail" placeholder="Enter your email">
-<br><br>
-
-<label for="Insertfile">Uplaod your Grade Report: </label>
-<input type ="file" id="file" name ="file"> 
-<br><br>
-
-<label for ="checkbox">  I agree to the terms and conditions </label>
-<input type = "checkbox" id ="terms" name="terms" value ="terms">
-<br><br>
-
-<label for ="PhoneNumber">Phone Number: </label>
-<input type="number" id = "PhoneNumber" name = "PhoneNumber" placeholder="Enter your phone number">
-<br><br>
-
-<label for ="Submit">Submit your information </label>
-<br>
-<input type="submit" id ="submit" name ="submit" value="Submit ">
 
 
 </form>
