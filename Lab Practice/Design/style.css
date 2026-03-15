@@ -6,7 +6,6 @@ body{
     padding: 80px
 }
 h1{
-    font-family: Arial, sans-serif;
     font-size: 50px;
     color: black;
     text-align: center;
@@ -21,7 +20,6 @@ form {
 table {
     width: 80%;
     border-spacing:15px;
-    align-content: center;
 }
 td {
     width: 50%;
@@ -31,19 +29,34 @@ label {
     font-weight: bold;
     font-size: 16px;
     color: black;
-    margin: 6px;
+    margin: 30px;
 }
 input,textarea {
     width: 100%;
+    margin: 30px;
     padding: 10px;
     border: 2px solid #d6d6d6;
     border-radius: 3px;
     font-size: 14px;
 }
-button{
+textarea {
+    height: 110px;
+    resize: none;
+}
+.btn {
+    background-color: #273d2d;
     color: white;
-    background-color: #183519;
-    font-size: 20px;
-    padding:10px 40px;
-    text-align: center;
+    border: none;
+    padding: 12px 55px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 25px;
+}
+
+.btn:hover {
+    background-color: #1e3023;
+}
+
+.center{
+    text-align:center;
 }
