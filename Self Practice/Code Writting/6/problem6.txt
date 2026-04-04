@@ -1,0 +1,15 @@
+6.	You are required to create a Product Management Page that allows a user to specify the quantity of an item and see an immediate update of the total cost. The interface must strictly adhere to the following functional requirements:
+
+Static Data: Define a fixed Unit Price for the product (let's say 1000). 
+
+Input Elements: An input field (type: number) for Quantity. 
+
+A readonly display area for the Total Price.
+
+Real-time Calculation: Use an event listener so that whenever the quantity is adjusted/updated, the Total Price updates automatically using the formula: Total = Unit Price * times Quantity. 
+
+Validation Logic: Minimum Threshold: Prevent the quantity from falling below 0. If a negative value is entered, reset it to 0 or display an error. 
+
+Gift Coupon Notification: if the fixed Total Price exceeds 1000, trigger a JavaScript alert() notifying the user that they are now eligible for gift coupon.
+
+**Use external CSS and JS.
