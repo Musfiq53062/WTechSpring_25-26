@@ -1,0 +1,6 @@
+5.	Create an HTML page with a button labeled "Change Background".
+When the button is clicked, the webpage’s background color should change to a random color. Use addEventListener to listen for the click event. Generate a random color each time the button is clicked. Apply the color to the document.body background.
+Example:
+First click → Background becomes light blue.
+Second click → Background becomes pale yellow.
+Third click → Background becomes lavender.
