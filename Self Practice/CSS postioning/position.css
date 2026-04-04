@@ -1,0 +1,63 @@
+body {
+    height: 2000px; /* for scrolling (to see fixed) */
+    font-family: Arial, sans-serif;
+}
+
+/* common style */
+.box {
+    width: 150px;
+    height: 80px;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    margin: 20px;
+}
+
+/* 1. STATIC (default) */
+.static {
+    position: static;
+    background-color: gray;
+}
+
+/* 2. RELATIVE */
+.relative {
+    position: relative;
+    left: 50px;
+    top: 20px;
+    background-color: blue;
+}
+
+/* container for absolute */
+.container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: lightgray;
+    margin: 20px;
+}
+
+/* 3. ABSOLUTE */
+.absolute { /* positioned relative to .container */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+}
+
+/* 4. STICKY */
+.sticky { /* becomes fixed when you scroll past it */
+    position: sticky;
+    top: 50px; /* distance from the top of the viewport */
+
+    background-color: orange;
+
+}
+
+/* 5. FIXED */
+.fixed {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: green;
+}
+
