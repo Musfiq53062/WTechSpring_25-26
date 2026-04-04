@@ -1,0 +1,2 @@
+2.	Create an HTML form with a single text field for entering a Username.
+As the user types, the characters should automatically convert to uppercase using JavaScript and the addEventListener method.
