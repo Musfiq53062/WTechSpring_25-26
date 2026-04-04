@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript Basics</title>
+</head>
+
+<body>
+<h1>JavaScript Basics</h1>
+<script>
+    var a= 2;
+a=4; 
+console.log(a); // 4 
+
+let b= 2;
+b=4;
+console.log(b); // 4
+
+let x = 10;
+let y = 20;
+let z = x + y;
+console.log(z); 
+console.log(typeof z);
+
+let x1 = "10";
+let y1 = "20";
+let z1 = x1 + y1;
+console.log(z1); // not 30, but "1020" because of string concatenation
+console.log(typeof z1); //not number, but string 
+
+
+let x2 = 10;
+let y2 = "20";
+let z2 = x2 + y2;
+console.log(z2);
+console.log(typeof z2); // "1020" and string, because of string concatenation
+
+let x3 = 10;
+let y3 = 20;
+console.log("The Result is: " + (x3 + y3)); // "The Result is: 30" because of string concatenation with the result of x3 + y3
+
+let x4 = 10;
+let y4 = 20;
+console.log("The Result is: " + x4 + y4); // "The Result is: 1020" because of string concatenation without parentheses, so it concatenates x4 and y4 as strings instead of adding them as numbers
+
+let x5 = 10;
+let y5 = 20;
+let z5 = "30";
+let result = x5 + y5 + z5;
+console.log("The Result is: " + result); // "3030" because of string concatenation, it first adds x5 and y5 to get 30, then concatenates with z5 to get "3030"
+
+let x6 = "100";
+let y6 = "10";
+let z6 = x6 / y6; //type coercion, converts the strings to numbers and then divide
+console.log("The Result is: " + z6); // "The Result is: 10" because of type coercion, it converts the strings to numbers and then divides them
+
+let x7 = "100";
+let y7 = "10";
+let z7 = x7 * y7; //type coercion, converts the strings to numbers and then multiply
+console.log("The Result is: " + z7); // "The Result is: 1000" because of type coercion, it converts the strings to numbers and then multiplies them
+
+let x8 = "100";
+let y8 = "10";
+let z8 =  x8 - y8; //type coercion, converts the strings to numbers and then subtract
+console.log("The Result is: " + z8); // "The Result is: 90" because of type coercion, it converts the strings to numbers and then subtracts them
+
+let x9 = "100";
+let y9 = "10";
+let z9 = x9 + y9; // it will not perform addition, but will concatenate the strings instead, resulting in "10010"
+console.log("The Result is: " + z9); //10010
+
+// NaN is a JavaScript reserved word indicating that a number is not a legal number.
+
+// Trying to do arithmetic with a non-numeric string will result in NaN (Not a Number):
+
+let x10 = 100 / "Apple";//not perform division, because "Apple" is not a numeric string
+console.log(x10); // NaN
+console.log(isNaN(x10)); // true-- isNaN() function checks if the value is NaN or not
+
+
+let x11 = 100 / "10";//however if string is numeric the result will be a number
+console.log(x11); // 10
+
+let x13 = NaN;
+let y13 = 5;
+let z13 = x13 + y13;
+console.log(z13); // NaN, because any arithmetic operation with NaN results in NaN  
+
+let x14 = NaN;
+let y14 = "5";
+let z14 = x14 + y14; //"NAN"+"5" = "NAN5"
+console.log(z14); //concate
+
+console.log(typeof NaN);// number, because NaN is considered a special numeric value in JavaScript
+
+
+let myNumber = 2;
+// Execute until Infinity
+while (myNumber != Infinity) {
+  myNumber = myNumber * myNumber;
+}
+console.log(myNumber); // Infinity
+
+
+let x15 =  2 / 0;
+let y15 = -2 / 0;
+console.log(x15); // Infinity
+console.log(y15); // -Infinity
+console.log(typeof x15); // number
+
+let x16 = 0xFF;
+console.log(x16); // 255
+
+//Number conversion: 
+let myNumber1 = 29;
+console.log(myNumber1.toString(32)); // t
+console.log(myNumber1.toString(16)); // 1D 
+console.log(myNumber1.toString(12)); // 25
+console.log(myNumber1.toString(10)); // 29
+console.log(myNumber1.toString(8)); // 35
+console.log(myNumber1.toString(2)); // 11101
+
+let y16 = new Number(123);
+console.log(y16); // [Number: 123] -- object
+
+let x17 = 123;
+let y17 = new Number(123);
+console.log(typeof x17); // "number"
+console.log(typeof y17); // "object"
+console.log(x17 === y17); // false, because they are different types, '===' check both value and type
+console.log(x17 == y17); // true, because '=='compares only values
+
+let x18 = new Number(500);
+let y18 = new Number(500);
+console.log(x18 == y18); // false, JavaScript objects cannot be compared
+
+let x19 = new Number(500);
+let y19 = new Number(500);
+console.log(x19 == y19); // false, JavaScript objects cannot be compared
+
+//Comparing two JavaScript objects always returns false.
+
+/*Basic Methods
+
+Basic number methods can be used on any number:
+toString()
+toExponential()
+toFixed()
+toPrecision()
+valueOf()
+
+Static Methods
+Static methods can only be used on Number:
+Number.isFinite()
+Number.isInteger()
+Number.isNan()
+Number.isSafeInteger()
+Number.parseInt()
+Number.parseFloat() */
+
+let x20 = 123;
+console.log(x20 + "--" + typeof x20); // "123 number"
+x20 = x20.toString();
+console.log(x20 + "--" + typeof x20);
+
+
+let text = x20.toString(16);// converts the number to a hexadecimal string
+console.log(text + "--" + typeof text); // "1111011 string"
+
+console.log(x20.valueOf());
+console.log((123).valueOf());
+console.log((100 + 23).valueOf());// valueOf() method returns the primitive value of a Number object, in this case it will return 123 for all three cases
+
+let x22 = 9.656634;
+console.log(x22.toExponential(2)); // "9.66e+0"
+console.log(x22.toExponential(4)); // "9.6560e+0"
+console.log(x22.toExponential(6)); // "9.656000e+0"
+
+console.log(x22.toFixed(0)); // "10"
+console.log(x22.toFixed(2)); // "9.66"
+
+console.log(x22.toPrecision()); // "9.656"
+console.log(x22.toPrecision(2)); // "9.7"
+console.log(x22.toPrecision(4)); // "9.656"
+
+console.log(Number(true)); // 1
+console.log(Number(false)); // 0
+console.log(Number("10")); // 10
+console.log(Number("  10")); // 10
+console.log(Number("10  ")); // 10
+console.log(Number(" 10  ")); // 10
+console.log(Number("10.33")); // 10.33
+console.log(Number("10,33")); // NaN
+console.log(Number("10 33")); // NaN
+console.log(Number("John")); // NaN 
+console.log(Number(new Date("2025-12-31"))); // 1735689600000 (the number of milliseconds since January 1, 1970, 00:00:00 UTC to the specified date)
+
+
+//STRING METHODS
+let text1 = "ABCDEFG";
+console.log(text1.length); // length=7
+/*
+The at(position) Method
+The charAt(position) Method
+The charCodeAt(position) Method
+*/
+console.log(text1.at(1)); // B
+console.log(text1.at(-1));// text1[7-1=6] =G
+console.log(text1.charAt(2)); // C
+console.log(text1.charCodeAt(2)); // 67 (ASCII value of 'C')
+console.log(text1.codePointAt(0)); // 65 (Unicode code point of 'A')
+
+let text2 = "World";
+let text3 = text1.concat(" ", text2);
+console.log(text3); // "ABCDEFG World"
+
+/*
+slice(start, end)
+substring(start, end)
+substr(start, length)
+*/
+console.log(text3.length); // 13
+console.log(text3.slice(4, 11));// "EFG Worl" (from index 4 to index 10, end index is not included)
+console.log(text3.slice(4));// "EFG World" (from index 4 to the end of the string)
+console.log(text3.slice(-4));// from text3[13-4=9] to the end of the string, "orld"
+console.log(text3.substring(5, 10));// "FG Wo" (from index 5 to index 9, end index is not included)
+console.log(text3.substring(4)); 
+console.log(text3.substr(4, 7)); // "EFG Worl" (from index 4, take 7 characters)
+console.log(text3.substr(-4)); // from text3[13-4=9] to the end of the string, "orld"
+console.log(text3.toUpperCase()); // "ABCDEFG WORLD"
+console.log(text3.toLowerCase()); // "abcdefg world"
+console.log(text3.isWellFormed());// true
+let text4 = "Hello World \uD830 ";
+console.log(text4.isWellFormed()); // false, because it contains unpaired surrogate characters (the "@" and "#" characters are not valid Unicode code points on their own)
+console.log(text4.toWellFormed()); 
+
+let text5 ="     Hello World    ";
+text6 = text5.trim();
+console.log(text6+"---"+text6.length);// "Hello World---11"
+text7 = text5.trimStart();
+console.log(text7+"---"+text7.length); // "Hello World    ---15"
+text8 = text5.trimEnd();
+console.log(text8+"---"+text8.length); // "    Hello World---15"
+
+console.log(text3.indexOf("World")); // text3 was "ABCDEFG World", so it will return 8, the index of the first character of "World"
+console.log(text3.includes("World")); // true, because "World" is a substring of text3
+console.log(text3.includes("world")); // false, because "world" is not a substring of text3 (case-sensitive)
+
+text3 = text3.replace("ABCDEFG", "Hello");//
+console.log(text3); // "Hello World", because it replaces the first occurrence of "ABCDEFG" with "Hello"
+
+console.log(text3.repeat(3)); // "Hello WorldHello WorldHello World", because it repeats the string 3 times
+
+console.log(text3.padStart(16, "*")); // "****Hello World", because it pads the string with "*" on the left side to make it 16 characters long
+console.log(text3.padEnd(16, "*")); // "Hello World****", because it pads the string with "*" on the right side to make it 16 characters long
+
+
+
+
+
+
+</script>
+</body>
+</html>
