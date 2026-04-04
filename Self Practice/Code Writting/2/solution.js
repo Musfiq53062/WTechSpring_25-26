@@ -1,5 +1,6 @@
 const usernameInput =document.getElementById("userName");
 
-usernameInput.addEventListener("input", function(){
-    usernameInput.value = usernameInput.value.toUpperCase();
-});
+function validateUsername(){
+    usernameInput.value= usernameInput.value.toUpperCase();
+}
+usernameInput.addEventListener("input", validateUsername);  
