@@ -1,0 +1,35 @@
+body {
+    position: relative;
+}
+
+/* common style */
+.box {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    color: white;
+    text-align: center;
+    line-height: 150px;
+}
+
+/* overlapping boxes */
+.box1 {
+    background-color: red;
+    top: 50px;
+    left: 50px;
+    z-index: 4;/* highest → front */
+}
+
+.box2 {
+    background-color: blue;
+    top: 140px;
+    left: 140px;
+    z-index: 3; /* middle → middle */
+}
+
+.box3 {
+    background-color: green;
+    top: 240px;
+    left: 240px;
+    z-index: 2;/* lowest → back */
+}
