@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+ 
+    <div id="container"> 
+        <button id="btn1">Add HTML</button> 
+        <button id="btn2">Clear</button> 
+    </div> 
+ 
+    <script> 
+         const container = document.getElementById("container"); 
+        const btn1 = document.getElementById("btn1"); 
+        const btn2 = document.getElementById("btn2"); 
+ 
+        btn1.addEventListener("click", () => { 
+            const p = document.createElement("p"); 
+            p.textContent = "HTML"; 
+            container.appendChild(p); 
+        }); 
+ 
+        btn2.addEventListener("click", () => { 
+            const paras = container.querySelectorAll("p"); 
+            paras.forEach(p => container.removeChild(p)); 
+        }); 
+
+        
+
+    </script> 
+ 
+</body> 
+</html> 
