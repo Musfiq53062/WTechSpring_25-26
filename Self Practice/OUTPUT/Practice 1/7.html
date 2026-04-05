@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+ 
+    <div id="container"> 
+        <button id="btn1">Add</button> 
+        <button id="btn2">Remove Last</button> 
+    </div> 
+ 
+    <script> 
+        const container = document.getElementById("container"); 
+        const btn1 = document.getElementById("btn1"); 
+        const btn2 = document.getElementById("btn2"); 
+ 
+        btn1.addEventListener("click", () => { 
+            const p = document.createElement("p"); 
+            p.textContent = "Node"; 
+            container.appendChild(p); 
+        }); 
+ 
+        btn2.addEventListener("click", () => { 
+            const paras = container.querySelectorAll("p"); 
+            if (paras.length > 0) { 
+                const last = paras[paras.length - 1]; 
+                container.removeChild(last); 
+            } 
+        }); 
+    </script> 
+ 
+</body> 
+</html>
