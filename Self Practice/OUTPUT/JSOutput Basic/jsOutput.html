@@ -4,8 +4,13 @@
         <p>My First Paragraph</p>
         <p id="demo"></p>
         <script>
-            
-            //inner html: Use innerHTML when you want to change an HTML element.
+        let arr=[1,2,3];
+        arr.length=5;
+        arr[4] =arr.length;
+        console.log(arr[arr[4] / 2]);// undefined because arr[4] is 5, so arr[5/2] is arr[2.5], which is not a valid index
+        console.log(null + "2" - 1); 
+        document.write(typeof (null + "2" - 1)); 
+        //inner html: Use innerHTML when you want to change an HTML element.
             /*
             var para1 = document.getElementById("demo");
             para1.innerHTML = "Hello World";
