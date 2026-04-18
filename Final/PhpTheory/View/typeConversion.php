@@ -18,5 +18,5 @@ $c = 12.34;
 $d = (string)$c; // Convert float to string 
  
 echo $b; echo " (" . gettype($b) . ")<br>";   
-echo $d; echo " (" . gettype($d) . ")"; 
+echo $d; echo " (" . gettype($d) . ")<br>"; 
 ?>
