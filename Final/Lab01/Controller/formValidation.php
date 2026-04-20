@@ -48,18 +48,30 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             $emailErr = "Invalid email format";
         }
         else {
-            echo "Email: " . $email . "<br>";
+            echo "Email: " .$email. "<br>";
         }
     }
+
 
     if (!empty($website)) {
         if (!filter_var($website, FILTER_VALIDATE_URL)) {
             $websiteErr = "Invalid URL format";
         } 
         else {
-            echo "Website: " . $website . "<br>";
+            echo "Website: " .$website. "<br>";
         }
     }
+
+    if(!empty($comment)){
+        if(strlen($commnt) < 4){
+            $commentErr = "Comment must be at least 5 characters";
+        }
+        else{
+            echo "Comment: " .$comment. "<br>";
+        }
+    }
+
+    
 
 }
 ?>
