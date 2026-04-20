@@ -26,15 +26,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $comment = $_REQUEST["comment"];
     $gender = $_REQUEST["gender"];
 
-    if(!empty ($name) && strlen($name)>=3){
-        echo "Name: ".$name."<br>";
+    
+    if(empty($name)){
+        $nameErr = "Email is required";
     }
     else{
-        if(empty($name)){
-            $nameErr = "Name is required";
+        if(strlen($name)<3){
+            $nameErr = "Name must be at least 3 characters";
         }
         else{
-            $nameErr = "Name must be at least 3 characters";
+            echo "Name: ".$name."<br>";
         }
     }
 
@@ -50,5 +51,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             echo "Email: " . $email . "<br>";
         }
     }
+
+    if (!empty($website)) {
+        if (!filter_var($website, FILTER_VALIDATE_URL)) {
+            $websiteErr = "Invalid URL format";
+        } 
+        else {
+            echo "Website: " . $website . "<br>";
+        }
+    }
+
 }
 ?>
