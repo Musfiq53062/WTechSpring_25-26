@@ -14,30 +14,27 @@ include "../Controller/formValidation.php";
 
                 <tr>
                     <td>Name:</td>
-                    <td><input type="text" name="name"> 
-                    <?php echo $nameErr; ?></td>
+                    <td><input type="text" name="name"> <?php echo $nameErr; ?></td>
                     <td style="color:red">*</td>
                 </tr>
 
                 
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" name="email"> 
-                    <?php echo $emailErr; ?></td>
+                    <td><input type="text" name="email"> <?php echo $emailErr; ?></td>
                     <td style="color:red">*</td>
                 </tr>
 
 
                 <tr>
                     <td>Website:</td>
-                    <td><input type="text" name="website"> 
-                    <?php echo $websiteErr; ?></td>
+                    <td><input type="text" name="website"> <?php echo $websiteErr; ?></td>
                 </tr>
 
 
                 <tr>
                     <td>Comment:</td>
-                    <td><textarea name="comment"></textarea></td>
+                    <td><textarea name="comment"></textarea> <?php echo $commentErr; ?> </td>
                 </tr>
 
 
