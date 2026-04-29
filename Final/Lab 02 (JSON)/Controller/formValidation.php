@@ -1,6 +1,7 @@
-<?php
+<?php 
 
 session_start();
+
 $nameErr = "";
 $emailErr = "";
 $websiteErr = "";
@@ -12,6 +13,8 @@ $email = "";
 $website = "";
 $comment = "";
 $gender = "";
+
+$datafile = "../data.json"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -40,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
     if (empty($email)) {
         $emailErr = "Email is required";
         $valid = false;
@@ -55,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
     if (!empty($website)) {
         if (!filter_var($website, FILTER_VALIDATE_URL)) {
             $websiteErr = "Invalid URL format";
@@ -65,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Website: " .$website. "<br>";
         }
     }
-
 
     if (!empty($comment)) {
         if (strlen($comment) < 4) {
@@ -77,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
     if (empty($gender)) {
         $genderErr = "Gender is required";
         $valid = false;
@@ -87,19 +86,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if($valid){
-        $_SESSION["name"] =$name;
+
+        $_SESSION["name"] = $name;
         setcookie("name", $name, time() +3600, "/");
+
         echo "Form Submitted Successfully <br>";
+
+        $formdata = array(
+            "Name" => $name,
+            "Email" => $email,
+            "Website" => $website,
+            "Comment" => $comment,
+            "Gender" => $gender
+        );
+
+        if(file_exists($datafile)){
+            $existingdata = file_get_contents($datafile);
+            $tempdata = json_decode($existingdata, true);
+        } else {
+            $tempdata = array();
+        }
+
+        if(!is_array($tempdata)){
+            $tempdata = array();
+        }
+
+        $tempdata[] = $formdata;
+
+        $jsondata = json_encode($tempdata, JSON_PRETTY_PRINT);
+
+        if(file_put_contents($datafile, $jsondata) !== false){
+            echo "Data Saved<br>";
+        } else {
+            echo "Error saving data<br>";
+        }
+
     }
     else {
         echo "Please fix errors and try again <br>";
     }  
 }
 
-
 if (isset($_SESSION["name"]) || isset($_COOKIE["name"])) {
     echo "Welcome Back " . ($_SESSION["name"] ?? $_COOKIE["name"]);
-} else {
+} 
+else {
     echo "Please submit the form!";
 }
 
