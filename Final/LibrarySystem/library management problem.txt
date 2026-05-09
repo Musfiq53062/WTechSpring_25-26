@@ -1,0 +1,21 @@
+Lab Task
+
+Design and implement a simplified Library Management System for a university using PHP, MySQL (procedural connection), HTML, and AJAX. 
+The system should follow a basic MVC structure (Model, View, Controller) to ensure proper separation of logic. 
+In this system, students will manage book records that include book title, author name, category, and availability status. 
+
+--> The HTML (View layer) will be used to create the user interface, 
+    including forms for adding and updating books and a table to display all records. 
+
+--> The PHP (Model and Controller layers) will handle all backend logic, 
+    where database connection will be established using procedural MySQL, and 
+    functions must be used to perform operations such as inserting a new book, retrieving all books, updating book details, and deleting records. 
+    
+--> Each of these functions should be placed in the Model, while the Controller will call these functions and process user requests. 
+
+--> The system must use AJAX for all CRUD operations, meaning data should be sent and received asynchronously without refreshing the page. 
+    For example, adding a new book, editing details, or deleting a record should be handled through AJAX requests to a PHP handler file.
+    The AAX layer will communicate with a dedicated PHP file that receives requests and calls the appropriate controller functions. 
+    
+Overall, students are required to demonstrate proper use of HTML for UI, AJAX for dynamic interaction, PHP functions for backend processing, and MySQL for data storage, all organized cleanly
+within the MVC folder structure.
