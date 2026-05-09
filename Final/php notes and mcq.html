@@ -1,0 +1,3651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHP Web Technologies — Complete Notes & 200 MCQs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --accent: #f0883e;
+    --accent2: #58a6ff;
+    --accent3: #3fb950;
+    --accent4: #ff7b72;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --heading: #f0f6fc;
+    --correct: #1f3b2a;
+    --correct-border: #3fb950;
+    --note-bg: #1a2433;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #1a2433 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(88,166,255,0.07), transparent);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    color: var(--heading);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent2); }
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .toc h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .toc a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 3px 0;
+    transition: color .2s;
+  }
+  .toc a:hover { color: var(--accent); }
+  @media(max-width:600px){ .toc-grid { grid-template-columns: 1fr; } }
+
+  /* ── SECTION HEADINGS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 52px 0 24px;
+  }
+  .section-num {
+    background: var(--accent);
+    color: #000;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    color: var(--heading);
+    line-height: 1.2;
+  }
+
+  .subsection { margin: 28px 0 16px; }
+  .subsection h3 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent2);
+    padding-left: 14px;
+    border-left: 3px solid var(--accent2);
+    margin-bottom: 10px;
+  }
+
+  /* ── NOTE CARDS ── */
+  .note-card {
+    background: var(--note-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .note-card p, .note-card li { color: var(--text); font-size: 14.5px; line-height: 1.75; }
+  .note-card ul { padding-left: 20px; margin-top: 8px; }
+  .note-card li { margin-bottom: 4px; }
+  .note-card strong { color: var(--accent); }
+  .note-card code {
+    font-family: 'Source Code Pro', monospace;
+    background: rgba(88,166,255,0.1);
+    color: var(--accent2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c9d1d9;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 14px 0 20px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--surface); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  /* ── MCQ SECTION ── */
+  .mcq-hero {
+    background: linear-gradient(135deg, #1a2433 0%, #0d1117 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .mcq-hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--heading);
+    margin-bottom: 8px;
+  }
+  .mcq-hero p { color: var(--muted); font-size: 14px; }
+
+  /* ── SCENARIO BLOCK ── */
+  .scenario {
+    background: rgba(88,166,255,0.06);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 28px 0 16px;
+    font-style: italic;
+    color: #a8d8f0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .scenario strong { font-style: normal; color: var(--accent2); font-weight: 700; }
+
+  /* ── QUESTION ── */
+  .question-block {
+    margin-bottom: 22px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .q-text {
+    font-weight: 700;
+    color: var(--heading);
+    font-size: 14.5px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+  .q-text code {
+    font-family: 'Source Code Pro', monospace;
+    background: #010409;
+    color: #79c0ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  @media(max-width:600px){ .options { grid-template-columns: 1fr; } }
+  .opt {
+    font-size: 13.5px;
+    color: var(--text);
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    transition: background .15s;
+  }
+  .opt.correct {
+    background: var(--correct);
+    border-color: var(--correct-border);
+    color: #7ee787;
+    font-weight: 700;
+  }
+  .opt span.label {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 6px;
+  }
+  .opt.correct span.label { color: var(--accent3); }
+
+  /* scenario group label */
+  .group-label {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Source Code Pro', monospace;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ── ANSWER KEY TABLE ── */
+  .answer-key {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-top: 48px;
+  }
+  .answer-key h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--heading);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .key-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 6px;
+  }
+  .key-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+    text-align: center;
+  }
+  .key-item span { color: var(--accent3); font-weight: 700; }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">CSC 3215 / CSC 3222 — Web Technologies</div>
+  <h1>PHP Web Technologies<br><span>Complete Notes &amp; 200 MCQs</span></h1>
+  <p>Comprehensive study guide covering all lecture topics: PHP basics to MVC, AJAX &amp; jQuery</p>
+</div>
+
+<div class="container">
+
+<!-- TOC -->
+<div class="toc">
+  <h2>📚 Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#s1">1. Introduction to PHP</a>
+    <a href="#s2">2. PHP Syntax, Variables &amp; Data Types</a>
+    <a href="#s3">3. Arrays &amp; Built-in Array Functions</a>
+    <a href="#s4">4. Conditional Statements</a>
+    <a href="#s5">5. Loops</a>
+    <a href="#s6">6. Functions</a>
+    <a href="#s7">7. Classes &amp; Objects (OOP)</a>
+    <a href="#s8">8. PHP Form Handling (GET &amp; POST)</a>
+    <a href="#s9">9. PHP Form Validation</a>
+    <a href="#s10">10. PHP Superglobals</a>
+    <a href="#s11">11. Cookies</a>
+    <a href="#s12">12. Sessions</a>
+    <a href="#s13">13. File Handling (Read/Write)</a>
+    <a href="#s14">14. PHP Include Files &amp; File Upload</a>
+    <a href="#s15">15. XML &amp; JSON in PHP</a>
+    <a href="#s16">16. AJAX</a>
+    <a href="#s17">17. jQuery</a>
+    <a href="#s18">18. MVC Architecture</a>
+    <a href="#mcq">▶ 200 MCQs</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     NOTES SECTION
+════════════════════════════════════════════ -->
+
+<!-- SECTION 1 -->
+<div id="s1" class="section-header">
+  <div class="section-num">01</div>
+  <h2>Introduction to PHP</h2>
+</div>
+<div class="note-card">
+  <p><strong>PHP</strong> stands for <strong>PHP: Hypertext Preprocessor</strong> — a recursive acronym. It is a <strong>server-side scripting language</strong> used to build dynamic and interactive web pages.</p>
+  <ul>
+    <li>PHP scripts execute on the <strong>server</strong>; result is returned as plain HTML to the browser.</li>
+    <li>PHP files have the <strong>.php</strong> extension and can contain HTML, CSS, JavaScript, and PHP code.</li>
+    <li>PHP is <strong>free</strong>, open-source, and runs on various platforms (Windows, Linux, Mac).</li>
+    <li>Compatible with almost all servers (Apache, IIS, etc.) and databases (MySQL, Oracle, etc.).</li>
+    <li>Latest stable release: <strong>PHP 8</strong> (notes reference PHP 7+).</li>
+  </ul>
+</div>
+<div class="note-card">
+  <p><strong>What can PHP do?</strong></p>
+  <ul>
+    <li>Generate dynamic page content</li>
+    <li>Create, open, read, write, delete, close files on the server</li>
+    <li>Collect form data</li>
+    <li>Send and receive <strong>cookies</strong></li>
+    <li>Add, delete, modify data in a database</li>
+    <li>Control user-access and encrypt data</li>
+  </ul>
+</div>
+<div class="note-card">
+  <p><strong>Installation — XAMPP:</strong> XAMPP (Apache + MariaDB/MySQL + PHP + Perl) is the most popular PHP development environment. After installation, save PHP files in <code>C:\xampp\htdocs\&lt;AppName&gt;\</code> and browse <code>http://localhost/&lt;AppName&gt;/file.php</code>.</p>
+</div>
+<div class="note-card">
+  <p><strong>PHP Script syntax:</strong></p>
+  <pre>&lt;?php
+echo "Hello World!";
+?&gt;</pre>
+  <ul>
+    <li>Starts with <code>&lt;?php</code> and ends with <code>?&gt;</code>.</li>
+    <li>Keywords, classes, functions are <strong>NOT case-sensitive</strong> (e.g., <code>echo</code>, <code>ECHO</code>, <code>EcHo</code> are all valid).</li>
+    <li><strong>Variable names ARE case-sensitive</strong> (<code>$age</code> ≠ <code>$AGE</code>).</li>
+    <li><strong>echo</strong> vs <strong>print</strong>: echo has no return value, can take multiple params; print returns 1, takes one argument.</li>
+  </ul>
+</div>
+
+<!-- SECTION 2 -->
+<div id="s2" class="section-header">
+  <div class="section-num">02</div>
+  <h2>PHP Syntax, Variables &amp; Data Types</h2>
+</div>
+
+<div class="subsection"><h3>Variables</h3></div>
+<div class="note-card">
+  <ul>
+    <li>Variables start with <code>$</code> sign: <code>$name = "John";</code></li>
+    <li>Must start with a <strong>letter</strong> or <strong>underscore</strong> (not a number).</li>
+    <li>Can only contain alphanumeric characters and underscores (<code>A-z, 0-9, _</code>).</li>
+    <li>PHP is <strong>loosely typed</strong> — no need to declare data type before a variable.</li>
+    <li>PHP automatically assigns data types to variables.</li>
+  </ul>
+</div>
+
+<div class="subsection"><h3>Comments</h3></div>
+<div class="note-card">
+  <pre>// Single-line comment
+# Also single-line
+/* Multi-line
+   comment */</pre>
+</div>
+
+<div class="subsection"><h3>Data Types</h3></div>
+<div class="note-card">
+  <p>PHP supports 7 data types:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Type</th><th>Example</th><th>Notes</th></tr>
+    <tr><td><strong>String</strong></td><td><code>$x = "Hello";</code></td><td>Single or double quotes</td></tr>
+    <tr><td><strong>Integer</strong></td><td><code>$x = 5985;</code></td><td>Whole numbers</td></tr>
+    <tr><td><strong>Float</strong></td><td><code>$x = 10.365;</code></td><td>Also called <em>double</em></td></tr>
+    <tr><td><strong>Boolean</strong></td><td><code>$x = true;</code></td><td>TRUE or FALSE</td></tr>
+    <tr><td><strong>Array</strong></td><td><code>$a = array(1,2,3);</code></td><td>Multiple values in one var</td></tr>
+    <tr><td><strong>Object</strong></td><td><code>$obj = new Car();</code></td><td>Instance of a class</td></tr>
+    <tr><td><strong>NULL</strong></td><td><code>$x = null;</code></td><td>Variable with no value</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="subsection"><h3>Type Checking Functions</h3></div>
+<div class="note-card">
+  <ul>
+    <li><code>var_dump($var)</code> — outputs type AND value</li>
+    <li><code>gettype($var)</code> — returns type as string</li>
+    <li><code>is_int() / is_integer() / is_long()</code></li>
+    <li><code>is_float() / is_double()</code></li>
+    <li><code>is_string()</code>, <code>is_bool()</code>, <code>is_array()</code>, <code>is_null()</code></li>
+    <li><code>is_numeric()</code> — checks if var is a number OR numeric string</li>
+    <li><code>isset($var)</code> — TRUE if var is declared AND not NULL</li>
+    <li><code>empty($var)</code> — TRUE if var is: 0, 0.0, "", "0", NULL, FALSE, array()</li>
+    <li><code>unset($var)</code> — destroys/unsets variable</li>
+  </ul>
+</div>
+
+<!-- SECTION 3 -->
+<div id="s3" class="section-header">
+  <div class="section-num">03</div>
+  <h2>Arrays &amp; Built-in Array Functions</h2>
+</div>
+<div class="note-card">
+  <p><strong>Indexed Array:</strong> <code>$cars = array("Volvo","BMW","Toyota");</code> — access with <code>$cars[0]</code>.</p>
+  <p><strong>Associative Array:</strong> named keys:</p>
+  <pre>$car = array("brand"=>"Ford", "model"=>"Mustang", "year"=>1964);
+echo $car["model"]; // Mustang</pre>
+  <p><strong>Iterate with foreach:</strong></p>
+  <pre>foreach($car as $x =&gt; $y) { echo "$x: $y &lt;br&gt;"; }</pre>
+</div>
+<div class="note-card">
+  <p><strong>Key Built-in Array Functions:</strong></p>
+  <ul>
+    <li><code>count($arr)</code> — number of elements</li>
+    <li><code>is_array($var)</code> — returns TRUE if array</li>
+    <li><code>in_array($val, $arr)</code> — TRUE if value in array</li>
+    <li><code>sort($arr)</code> / <code>rsort($arr)</code> — sort ascending / descending (modifies array in-place)</li>
+    <li><code>shuffle($arr)</code> — random order (in-place)</li>
+    <li><code>implode($glue, $arr)</code> — join array to string: <code>implode('|', $a)</code> → <code>"apple|orange"</code></li>
+    <li><code>explode($delimiter, $str)</code> — split string into array</li>
+    <li><code>array_push($arr, $val)</code> — add to END; also <code>$arr[] = $val</code></li>
+    <li><code>array_pop($arr)</code> — remove &amp; return LAST element</li>
+    <li><code>array_shift($arr)</code> — remove &amp; return FIRST element</li>
+    <li><code>array_unshift($arr, $val)</code> — add to BEGINNING</li>
+    <li><code>reset($arr)</code> / <code>end($arr)</code> — first / last element</li>
+  </ul>
+</div>
+
+<!-- SECTION 4 -->
+<div id="s4" class="section-header">
+  <div class="section-num">04</div>
+  <h2>Conditional Statements</h2>
+</div>
+<div class="note-card">
+  <p><strong>if / elseif / else:</strong></p>
+  <pre>if ($age &lt; 18) {
+    echo "Minor";
+} elseif ($age &lt; 60) {
+    echo "Adult";
+} else {
+    echo "Senior";
+}</pre>
+  <p><strong>switch:</strong> Performs different actions based on variable value. Use <code>break</code> to stop execution falling through.</p>
+  <pre>switch ($favcolor) {
+    case "red": echo "Red!"; break;
+    case "blue": echo "Blue!"; break;
+    default: echo "Other";
+}</pre>
+  <p>The <code>default</code> block runs when no case matches.</p>
+</div>
+
+<!-- SECTION 5 -->
+<div id="s5" class="section-header">
+  <div class="section-num">05</div>
+  <h2>Loops</h2>
+</div>
+<div class="note-card">
+  <p>PHP has 4 loop types:</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Loop</th><th>When to use</th><th>Key behavior</th></tr>
+    <tr><td><code>while</code></td><td>Unknown iterations</td><td>Checks condition BEFORE each iteration</td></tr>
+    <tr><td><code>do...while</code></td><td>Run at least once</td><td>Checks condition AFTER first run</td></tr>
+    <tr><td><code>for</code></td><td>Known iteration count</td><td>init; condition; increment</td></tr>
+    <tr><td><code>foreach</code></td><td>Arrays only</td><td>Iterates over each key/value pair</td></tr>
+  </table>
+  </div>
+  <pre>// while
+$x = 1;
+while($x &lt;= 5) { echo $x; $x++; }
+
+// for
+for($x = 0; $x &lt;= 10; $x++) { echo $x; }
+
+// foreach
+foreach($colors as $value) { echo $value; }
+foreach($age as $key =&gt; $val) { echo "$key=$val"; }</pre>
+</div>
+
+<!-- SECTION 6 -->
+<div id="s6" class="section-header">
+  <div class="section-num">06</div>
+  <h2>Functions</h2>
+</div>
+<div class="note-card">
+  <ul>
+    <li>PHP has <strong>1000+ built-in functions</strong> plus user-defined functions.</li>
+    <li>Functions are defined with the <code>function</code> keyword.</li>
+    <li><strong>Type declarations</strong> (PHP 7+): specify expected types in parameters.</li>
+    <li><strong>Strict mode</strong>: <code>declare(strict_types=1);</code> — throws Fatal Error on type mismatch.</li>
+    <li><strong>Default argument values:</strong> <code>function setHeight(int $h = 50)</code></li>
+    <li><strong>Return type declarations:</strong> <code>function add(float $a, float $b) : int</code></li>
+    <li><strong>Pass by value</strong> (default) vs <strong>pass by reference</strong> (<code>&amp;$var</code>): reference changes original.</li>
+  </ul>
+  <pre>// Pass by reference example
+function doubleIt($v1, &amp;$v2) {
+    $v1 = $v1 * 2; // original $a unchanged
+    $v2 = $v2 * 2; // original $b IS changed
+}
+$a = 3; $b = 5;
+doubleIt($a, $b);
+// $a = 3, $b = 10</pre>
+</div>
+<div class="note-card">
+  <p><strong>String Validation Functions:</strong></p>
+  <ul>
+    <li><code>strlen($str)</code> — length of string</li>
+    <li><code>strpos($str, $find)</code> — position of first occurrence (FALSE if not found)</li>
+    <li><code>preg_match($pattern, $str)</code> — regex match</li>
+    <li><code>ctype_alnum($str)</code> — only alphanumeric</li>
+    <li><code>ctype_alpha($str)</code> — only alphabetic</li>
+    <li><code>filter_var($email, FILTER_VALIDATE_EMAIL)</code> — validate email</li>
+    <li><code>htmlspecialchars($str)</code> — converts special chars to HTML entities (XSS prevention)</li>
+    <li><code>trim($str)</code> — remove leading/trailing whitespace</li>
+    <li><code>stripslashes($str)</code> — remove backslashes</li>
+  </ul>
+</div>
+
+<!-- SECTION 7 -->
+<div id="s7" class="section-header">
+  <div class="section-num">07</div>
+  <h2>Classes &amp; Objects (OOP)</h2>
+</div>
+<div class="note-card">
+  <ul>
+    <li>OOP available since <strong>PHP 5</strong>.</li>
+    <li>A <strong>class</strong> is a template for objects; an <strong>object</strong> is an instance of a class.</li>
+    <li><strong>$this</strong> refers to the current object.</li>
+    <li><strong>new</strong> keyword creates an object: <code>$apple = new Fruit();</code></li>
+    <li>Access properties/methods with <code>-&gt;</code> operator.</li>
+  </ul>
+  <pre>class Fruit {
+    private $name;
+    private $color;
+
+    public function __construct($name, $color) {
+        $this-&gt;name = $name;
+        $this-&gt;color = $color;
+    }
+    public function __destruct() { echo "destructor"; }
+    public function get_name() { return $this-&gt;name; }
+    public function set_name($name) { $this-&gt;name = $name; }
+    public function __toString() {
+        return __CLASS__ . "[name=" . $this-&gt;name . "]";
+    }
+}</pre>
+</div>
+<div class="note-card">
+  <p><strong>Key OOP concepts:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Concept</th><th>Description</th></tr>
+    <tr><td><strong>public</strong></td><td>Accessible from anywhere</td></tr>
+    <tr><td><strong>private</strong></td><td>Accessible only within the class</td></tr>
+    <tr><td><strong>protected</strong></td><td>Accessible within class and subclasses</td></tr>
+    <tr><td><code>__construct()</code></td><td>Constructor — called automatically on <code>new</code></td></tr>
+    <tr><td><code>__destruct()</code></td><td>Destructor — called when object is destroyed</td></tr>
+    <tr><td><code>__toString()</code></td><td>Called when object is used as a string</td></tr>
+  </table>
+  </div>
+  <p><strong>OOP Advantages:</strong> Faster development, DRY code, clear structure, easier maintenance &amp; debugging, reusable code.</p>
+</div>
+
+<!-- SECTION 8 -->
+<div id="s8" class="section-header">
+  <div class="section-num">08</div>
+  <h2>PHP Form Handling (GET &amp; POST)</h2>
+</div>
+<div class="note-card">
+  <p>The PHP superglobals <strong>$_GET</strong> and <strong>$_POST</strong> are used to collect form data.</p>
+  <pre>&lt;form action="welcome.php" method="post"&gt;
+  Name: &lt;input type="text" name="name"&gt;
+  &lt;input type="submit"&gt;
+&lt;/form&gt;</pre>
+  <pre>// welcome.php
+echo $_POST["name"];
+echo $_GET["name"]; // if method="get"</pre>
+</div>
+<div class="note-card">
+  <p><strong>GET vs POST Comparison:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Feature</th><th>GET</th><th>POST</th></tr>
+    <tr><td>Visibility</td><td>Data in URL (visible)</td><td>In HTTP body (hidden)</td></tr>
+    <tr><td>Data limit</td><td>~2048 characters</td><td>No restriction</td></tr>
+    <tr><td>Data types</td><td>ASCII only</td><td>No restriction (binary OK)</td></tr>
+    <tr><td>Bookmarkable</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Browser history</td><td>Params saved</td><td>Params NOT saved</td></tr>
+    <tr><td>Caching</td><td>Can be cached</td><td>Not cached</td></tr>
+    <tr><td>Security</td><td>Less secure</td><td>Slightly more secure</td></tr>
+    <tr><td>File upload</td><td>No</td><td>Yes (multipart)</td></tr>
+    <tr><td>Passwords</td><td>NEVER use GET</td><td>Use POST</td></tr>
+  </table>
+  </div>
+</div>
+<div class="note-card">
+  <p><strong>$_SERVER["PHP_SELF"]</strong> — returns the filename of the currently executing script. Used to submit a form to the SAME page:</p>
+  <pre>&lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?&gt;"&gt;</pre>
+  <p>Always wrap with <code>htmlspecialchars()</code> to prevent XSS attacks.</p>
+</div>
+
+<!-- SECTION 9 -->
+<div id="s9" class="section-header">
+  <div class="section-num">09</div>
+  <h2>PHP Form Validation</h2>
+</div>
+<div class="note-card">
+  <p>The <code>test_input()</code> helper function — apply to all form data:</p>
+  <pre>function test_input($data) {
+    $data = trim($data);        // Remove extra whitespace
+    $data = stripslashes($data); // Remove backslashes
+    $data = htmlspecialchars($data); // Convert special chars
+    return $data;
+}</pre>
+</div>
+<div class="note-card">
+  <p><strong>Common Validation Rules &amp; Functions:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Field</th><th>Rule</th><th>PHP code</th></tr>
+    <tr><td>Name</td><td>Letters &amp; whitespace only</td><td><code>preg_match("/^[a-zA-Z ]*$/", $name)</code></td></tr>
+    <tr><td>Email</td><td>Valid email format</td><td><code>filter_var($email, FILTER_VALIDATE_EMAIL)</code></td></tr>
+    <tr><td>URL</td><td>Valid URL format</td><td><code>preg_match("/regex/", $url)</code></td></tr>
+    <tr><td>Required</td><td>Not empty</td><td><code>empty($_POST["field"])</code></td></tr>
+  </table>
+  </div>
+</div>
+
+<!-- SECTION 10 -->
+<div id="s10" class="section-header">
+  <div class="section-num">10</div>
+  <h2>PHP Superglobals</h2>
+</div>
+<div class="note-card">
+  <p>Superglobals are predefined variables accessible from ANY scope — functions, classes, files — without special handling.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Superglobal</th><th>Purpose</th></tr>
+    <tr><td><code>$GLOBALS</code></td><td>Access all global variables from anywhere</td></tr>
+    <tr><td><code>$_SERVER</code></td><td>Headers, paths, script locations</td></tr>
+    <tr><td><code>$_REQUEST</code></td><td>Contains $_GET, $_POST, and $_COOKIE</td></tr>
+    <tr><td><code>$_POST</code></td><td>Form data submitted via HTTP POST</td></tr>
+    <tr><td><code>$_GET</code></td><td>URL parameters / form submitted via GET</td></tr>
+    <tr><td><code>$_FILES</code></td><td>File upload info</td></tr>
+    <tr><td><code>$_COOKIE</code></td><td>Cookie values</td></tr>
+    <tr><td><code>$_SESSION</code></td><td>Session variables</td></tr>
+    <tr><td><code>$_ENV</code></td><td>Environment variables</td></tr>
+  </table>
+  </div>
+</div>
+
+<!-- SECTION 11 -->
+<div id="s11" class="section-header">
+  <div class="section-num">11</div>
+  <h2>Cookies</h2>
+</div>
+<div class="note-card">
+  <ul>
+    <li>A <strong>cookie</strong> is a small file the server embeds on the user's computer to identify them.</li>
+    <li>Every request to the same site sends the cookie back to the server.</li>
+    <li><code>setcookie()</code> must be called <strong>BEFORE</strong> any HTML output (<code>&lt;html&gt;</code> tag).</li>
+  </ul>
+  <pre>setcookie(name, value, expire, path, domain, secure, httponly);
+
+// Example: cookie valid for 30 days
+setcookie("user", "Alex", time() + (86400 * 30), "/");
+// 86400 seconds = 1 day
+
+// Read cookie
+echo $_COOKIE["user"];
+
+// Delete cookie: set expiration in the past
+setcookie("user", "", time() - 3600);
+
+// Check if cookies enabled
+if(count($_COOKIE) &gt; 0) echo "Enabled";
+else echo "Disabled";</pre>
+</div>
+<div class="note-card">
+  <p><strong>Cookie types:</strong></p>
+  <ul>
+    <li><strong>Session cookies</strong> — disappear when browser is closed (no expiry set)</li>
+    <li><strong>Persistent cookies</strong> — stored until expiry date</li>
+    <li><strong>Tracking cookies</strong> — used for long-term records across visits</li>
+  </ul>
+  <p>If a cookie is set <strong>without an expiration time</strong>, it is a session cookie — it lasts only until the browser is closed.</p>
+</div>
+
+<!-- SECTION 12 -->
+<div id="s12" class="section-header">
+  <div class="section-num">12</div>
+  <h2>Sessions</h2>
+</div>
+<div class="note-card">
+  <ul>
+    <li>A <strong>session</strong> stores information in <strong>server-side variables</strong> accessible across multiple pages.</li>
+    <li>Unlike cookies, session data is NOT stored on the user's computer.</li>
+    <li>Each user gets a unique <strong>session ID</strong>.</li>
+    <li><code>session_start()</code> must be the <strong>very first</strong> line in the document (before any HTML).</li>
+  </ul>
+  <pre>// Start session
+&lt;?php session_start(); ?&gt;
+
+// Set session variable
+$_SESSION["favcolor"] = "yellow";
+
+// Read session variable
+echo $_SESSION["favcolor"];
+
+// Display all session variables
+print_r($_SESSION);
+
+// Remove all session variables (keeps session)
+session_unset();
+
+// Destroy the session completely
+session_destroy();</pre>
+</div>
+<div class="note-card">
+  <p><strong>Cookie vs Session:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Feature</th><th>Cookie</th><th>Session</th></tr>
+    <tr><td>Storage</td><td>User's computer (client)</td><td>Server</td></tr>
+    <tr><td>Security</td><td>Less secure</td><td>More secure</td></tr>
+    <tr><td>Expiry</td><td>Set by developer</td><td>Ends when browser closed or session_destroy()</td></tr>
+    <tr><td>Data size</td><td>~4KB</td><td>Limited by server memory</td></tr>
+    <tr><td>Data type</td><td>Text strings only</td><td>Any PHP type</td></tr>
+  </table>
+  </div>
+</div>
+
+<!-- SECTION 13 -->
+<div id="s13" class="section-header">
+  <div class="section-num">13</div>
+  <h2>File Handling (Read / Write)</h2>
+</div>
+<div class="note-card">
+  <p><strong>Reading files:</strong></p>
+  <pre>// Simple: readfile reads entire file
+readfile("webdictionary.txt");
+
+// Better: fopen for more options
+$myfile = fopen("webdictionary.txt", "r") or die("Cannot open!");
+echo fread($myfile, filesize("webdictionary.txt"));
+fclose($myfile);</pre>
+</div>
+<div class="note-card">
+  <p><strong>File open modes:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Mode</th><th>Description</th></tr>
+    <tr><td><code>r</code></td><td>Read only, pointer at beginning</td></tr>
+    <tr><td><code>w</code></td><td>Write only, erases content (creates if not exists)</td></tr>
+    <tr><td><code>a</code></td><td>Write only, APPENDS (preserves existing data)</td></tr>
+    <tr><td><code>x</code></td><td>Create new file for write only; fails if exists</td></tr>
+    <tr><td><code>r+</code></td><td>Read/Write, pointer at beginning</td></tr>
+    <tr><td><code>w+</code></td><td>Read/Write, erases content</td></tr>
+    <tr><td><code>a+</code></td><td>Read/Write, appends</td></tr>
+  </table>
+  </div>
+  <pre>// Write to file
+$myfile = fopen("newfile.txt", "w") or die("Cannot open!");
+fwrite($myfile, "John Doe\n");
+fwrite($myfile, "Jane Doe\n");
+fclose($myfile);</pre>
+</div>
+
+<!-- SECTION 14 -->
+<div id="s14" class="section-header">
+  <div class="section-num">14</div>
+  <h2>PHP Include Files &amp; File Upload</h2>
+</div>
+<div class="note-card">
+  <p><strong>include vs require:</strong></p>
+  <ul>
+    <li><code>include</code> — produces a <strong>warning (E_WARNING)</strong> on failure; script continues.</li>
+    <li><code>require</code> — produces a <strong>fatal error (E_COMPILE_ERROR)</strong> on failure; script stops.</li>
+  </ul>
+  <pre>&lt;?php include 'footer.php'; ?&gt;
+&lt;?php require 'config.php'; ?&gt;</pre>
+</div>
+<div class="note-card">
+  <p><strong>File Upload:</strong></p>
+  <ul>
+    <li>Enable in <code>php.ini</code>: <code>file_uploads = On</code></li>
+    <li>Form must use <code>method="post"</code> AND <code>enctype="multipart/form-data"</code></li>
+    <li>Uploaded file info is in <strong>$_FILES</strong> superglobal.</li>
+    <li>PHP places file in a <strong>temporary location</strong> first.</li>
+    <li>Use <code>move_uploaded_file()</code> to move from temp to final location.</li>
+  </ul>
+  <pre>&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+  &lt;input type="file" name="fileToUpload"&gt;
+  &lt;input type="submit" value="Upload"&gt;
+&lt;/form&gt;</pre>
+  <pre>// upload.php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
+if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
+    echo "Uploaded: " . basename($_FILES["fileToUpload"]["name"]);
+}</pre>
+  <p><strong>$_FILES array keys:</strong> <code>['name']</code>, <code>['type']</code>, <code>['size']</code>, <code>['tmp_name']</code>, <code>['error']</code></p>
+</div>
+
+<!-- SECTION 15 -->
+<div id="s15" class="section-header">
+  <div class="section-num">15</div>
+  <h2>XML &amp; JSON in PHP</h2>
+</div>
+<div class="note-card">
+  <p><strong>XML — SimpleXML:</strong></p>
+  <pre>// Read XML from file
+$xml = simplexml_load_file("note.xml") or die("Error");
+echo $xml-&gt;to;   // Get node value
+print_r($xml);   // View all data
+
+// Create/Write XML
+$sxml = new SimpleXMLElement('&lt;?xml version="1.0"?&gt;&lt;books/&gt;');
+$book = $sxml-&gt;addChild('book');
+$book-&gt;addChild("Booktitle", "My Book");
+$book-&gt;addChild("Year", 2024);
+file_put_contents('books.xml', $sxml-&gt;asXML());</pre>
+</div>
+<div class="note-card">
+  <p><strong>JSON:</strong> JavaScript Object Notation — lightweight data interchange format.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>JSON vs XML</th><th>JSON</th><th>XML</th></tr>
+    <tr><td>End tags</td><td>No end tags</td><td>Has end tags</td></tr>
+    <tr><td>Length</td><td>Shorter</td><td>Longer</td></tr>
+    <tr><td>Arrays</td><td>Can use arrays</td><td>Cannot</td></tr>
+    <tr><td>Read/Write</td><td>Faster</td><td>Slower</td></tr>
+    <tr><td>Both</td><td colspan="2">Human readable, hierarchical, language-independent, XHR-fetchable</td></tr>
+  </table>
+  </div>
+  <p><strong>JSON Data Types:</strong> string, number, object, array, boolean, null</p>
+  <pre>// PHP JSON Functions
+$arr = ["name"=>"John", "age"=&gt;30];
+$json = json_encode($arr, JSON_PRETTY_PRINT); // Array → JSON string
+file_put_contents("data.json", $json);
+
+$str = file_get_contents("data.json"); // Read from file
+$data = json_decode($str, true); // JSON string → PHP array
+echo $data["name"];</pre>
+</div>
+
+<!-- SECTION 16 -->
+<div id="s16" class="section-header">
+  <div class="section-num">16</div>
+  <h2>AJAX</h2>
+</div>
+<div class="note-card">
+  <p><strong>AJAX</strong> = Asynchronous JavaScript And XML. It is NOT a programming language — it is a <strong>technique</strong> for accessing web servers from a web page without full-page reload.</p>
+  <ul>
+    <li>Uses <strong>XMLHttpRequest</strong> object (built into browsers)</li>
+    <li>Can update parts of a page without reloading</li>
+    <li>Sends/receives data in the background</li>
+  </ul>
+  <p><strong>How AJAX works (7 steps):</strong></p>
+  <ol style="padding-left:20px;margin-top:8px;color:var(--text)">
+    <li>An event occurs in the web page</li>
+    <li>XMLHttpRequest object is created by JavaScript</li>
+    <li>XMLHttpRequest sends request to web server</li>
+    <li>Server processes the request</li>
+    <li>Server sends response back to the page</li>
+    <li>Response is read by JavaScript</li>
+    <li>JavaScript updates the page</li>
+  </ol>
+</div>
+<div class="note-card">
+  <p><strong>XMLHttpRequest Methods:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Method</th><th>Description</th></tr>
+    <tr><td><code>new XMLHttpRequest()</code></td><td>Creates the object</td></tr>
+    <tr><td><code>open(method,url,async)</code></td><td>Specifies request type, URL, async mode</td></tr>
+    <tr><td><code>send()</code></td><td>Sends GET request</td></tr>
+    <tr><td><code>send(string)</code></td><td>Sends POST request</td></tr>
+    <tr><td><code>setRequestHeader()</code></td><td>Adds HTTP header</td></tr>
+    <tr><td><code>abort()</code></td><td>Cancels current request</td></tr>
+    <tr><td><code>getAllResponseHeaders()</code></td><td>Returns all header info</td></tr>
+  </table>
+  </div>
+  <p><strong>readyState values:</strong> 0=not initialized, 1=connected, 2=received, 3=processing, 4=ready</p>
+  <p><strong>HTTP status:</strong> 200=OK, 403=Forbidden, 404=Not Found</p>
+  <pre>var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 &amp;&amp; this.status == 200) {
+        document.getElementById("demo").innerHTML = this.responseText;
+    }
+};
+xhttp.open("GET", "ajax_info.txt", true); // true = async
+xhttp.send();</pre>
+</div>
+
+<!-- SECTION 17 -->
+<div id="s17" class="section-header">
+  <div class="section-num">17</div>
+  <h2>jQuery</h2>
+</div>
+<div class="note-card">
+  <p><strong>jQuery</strong> is a lightweight JavaScript library ("write less, do more"). It simplifies HTML/DOM manipulation, CSS manipulation, AJAX, event handling, and animations.</p>
+  <p><strong>Basic syntax:</strong> <code>$(selector).action()</code></p>
+  <ul>
+    <li><code>$</code> — defines jQuery</li>
+    <li><code>selector</code> — finds HTML elements</li>
+    <li><code>action()</code> — performed on elements</li>
+  </ul>
+  <pre>$(this).hide()        // hides current element
+$("p").hide()         // hides all &lt;p&gt;
+$(".test").hide()     // hides all class="test"
+$("#test").hide()     // hides id="test"</pre>
+</div>
+<div class="note-card">
+  <p><strong>Selectors:</strong></p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Selector</th><th>Syntax</th><th>Finds</th></tr>
+    <tr><td>Element</td><td><code>$("p")</code></td><td>All &lt;p&gt; elements</td></tr>
+    <tr><td>ID</td><td><code>$("#test")</code></td><td>Element with id="test"</td></tr>
+    <tr><td>Class</td><td><code>$(".test")</code></td><td>Elements with class="test"</td></tr>
+  </table>
+  </div>
+  <p><strong>Common Event Methods:</strong> <code>click()</code>, <code>dblclick()</code>, <code>mouseenter()</code>, <code>mouseleave()</code>, <code>mousedown()</code>, <code>mouseup()</code>, <code>hover()</code>, <code>focus()</code>, <code>blur()</code>, <code>on()</code></p>
+  <pre>$(document).ready(function(){       // Run when DOM is loaded
+    $("p").click(function(){
+        $(this).hide();
+    });
+    $("p").on({                       // Multiple events
+        mouseenter: function(){ $(this).css("background","lightgray"); },
+        click:      function(){ $(this).css("background","yellow"); }
+    });
+});</pre>
+</div>
+
+<!-- SECTION 18 -->
+<div id="s18" class="section-header">
+  <div class="section-num">18</div>
+  <h2>MVC Architecture</h2>
+</div>
+<div class="note-card">
+  <p><strong>MVC</strong> = Model — View — Controller. An application design pattern that separates application data and business logic from presentation.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Component</th><th>Role</th><th>Examples</th></tr>
+    <tr><td><strong>Model</strong></td><td>Manages data &amp; business rules; database operations (fetch/update)</td><td>Database class, data access layer</td></tr>
+    <tr><td><strong>View</strong></td><td>Presentation / GUI; what user sees</td><td>HTML, CSS templates</td></tr>
+    <tr><td><strong>Controller</strong></td><td>Mediator between Model &amp; View; handles user requests; business logic</td><td>PHP controller classes</td></tr>
+  </table>
+  </div>
+  <p><strong>How it works:</strong> User request → Controller → Model (data) → Controller → View (rendered HTML) → User.</p>
+</div>
+<div class="note-card">
+  <p><strong>MVC Advantages:</strong> Faster development, multiple devs can collaborate, easier to update/debug, separation of concerns.</p>
+  <p><strong>MVC Disadvantages:</strong> Hard to understand initially, strict rules needed.</p>
+  <p><strong>Popular PHP MVC Frameworks:</strong> Laravel, CodeIgniter, Symfony, CakePHP, Yii, Zend Framework.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     MCQ SECTION
+════════════════════════════════════════════ -->
+<div id="mcq" class="mcq-hero">
+  <h2>200 Multiple Choice Questions</h2>
+  <p>Scenario-based &amp; concept MCQs covering all topics | Correct answer marked in green</p>
+</div>
+
+<!-- helper macro via JS — just write the questions inline -->
+<!-- Q1–Q10: PHP Basics + Variables + Data Types -->
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q1 to Q4</span><br>
+  <strong>Sadia</strong> is a first-year CS student learning PHP. She opens a text editor, creates her first PHP file <code>hello.php</code>, and saves it in <code>C:\xampp\htdocs\lab1\</code>. She writes various snippets to understand data types and variable rules.
+</div>
+
+<div class="question-block">
+  <div class="q-text">1. Sadia writes <code>&lt;?php $name = "Alice"; echo $NAME; ?&gt;</code>. What happens?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Outputs "Alice"</div>
+    <div class="opt correct"><span class="label">B.</span> Undefined variable notice / empty output</div>
+    <div class="opt"><span class="label">C.</span> Syntax error</div>
+    <div class="opt"><span class="label">D.</span> Outputs "NAME"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">2. Sadia types: <code>$1name = "test";</code>. Why is this invalid?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Variable names cannot contain letters</div>
+    <div class="opt correct"><span class="label">B.</span> Variable names cannot start with a number</div>
+    <div class="opt"><span class="label">C.</span> The dollar sign is optional</div>
+    <div class="opt"><span class="label">D.</span> Variable names must be uppercase</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">3. She runs <code>var_dump(3.75);</code>. What is the correct output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> string(4) "3.75"</div>
+    <div class="opt"><span class="label">B.</span> int(3)</div>
+    <div class="opt correct"><span class="label">C.</span> float(3.75)</div>
+    <div class="opt"><span class="label">D.</span> double(3.75)</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">4. Sadia needs to check if <code>$score = "95"</code> is numeric before storing. Best function?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> is_int($score)</div>
+    <div class="opt"><span class="label">B.</span> is_string($score)</div>
+    <div class="opt correct"><span class="label">C.</span> is_numeric($score)</div>
+    <div class="opt"><span class="label">D.</span> is_float($score)</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q5 to Q8</span><br>
+  <strong>Rafiq</strong> builds a product catalogue. He uses PHP arrays and built-in functions to manipulate product data.
+</div>
+
+<div class="question-block">
+  <div class="q-text">5. Rafiq writes: <code>$items = array("Pen","Book","Ruler"); $items[] = "Eraser";</code> What is the index of "Eraser"?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 0</div>
+    <div class="opt"><span class="label">B.</span> 2</div>
+    <div class="opt correct"><span class="label">C.</span> 3</div>
+    <div class="opt"><span class="label">D.</span> 4</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">6. Rafiq has <code>$nums = array(3,1,4); sort($nums); echo implode(',', $nums);</code>. Output?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> 1,3,4</div>
+    <div class="opt"><span class="label">B.</span> 3,1,4</div>
+    <div class="opt"><span class="label">C.</span> 4,3,1</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">7. Rafiq wants to add "Notebook" to the END of <code>$cart = ['shirt','hat'];</code>. Which function?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> array_shift()</div>
+    <div class="opt correct"><span class="label">B.</span> array_push()</div>
+    <div class="opt"><span class="label">C.</span> array_unshift()</div>
+    <div class="opt"><span class="label">D.</span> array_insert()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">8. Rafiq uses: <code>$days='Mon,Tue,Wed'; $arr=explode(',', $days); echo count($arr);</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 1</div>
+    <div class="opt"><span class="label">B.</span> 2</div>
+    <div class="opt correct"><span class="label">C.</span> 3</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q9 to Q12</span><br>
+  <strong>Priya</strong> writes a payroll calculator. She creates a PHP class <code>Employee</code> with attributes id, name, salary and methods to compute net salary.
+</div>
+
+<div class="question-block">
+  <div class="q-text">9. Priya writes: <code>class Employee { public $name; function get_name(){return $this-&gt;name;} } $emp = new Employee(); $emp-&gt;name='Priya'; echo $emp-&gt;get_name();</code> Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Nothing</div>
+    <div class="opt correct"><span class="label">B.</span> Priya</div>
+    <div class="opt"><span class="label">C.</span> Error</div>
+    <div class="opt"><span class="label">D.</span> Employee</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">10. The team lead asks Priya to prevent salary being set negative. Best place for this validation?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> In the setter method inside the class</div>
+    <div class="opt"><span class="label">B.</span> In the HTML form only</div>
+    <div class="opt"><span class="label">C.</span> Validation is impossible inside a class</div>
+    <div class="opt"><span class="label">D.</span> In the echo statement</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">11. Which magic method is automatically called when an object is destroyed in PHP?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> __construct()</div>
+    <div class="opt correct"><span class="label">B.</span> __destruct()</div>
+    <div class="opt"><span class="label">C.</span> __toString()</div>
+    <div class="opt"><span class="label">D.</span> __delete()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">12. In OOP, what does the keyword <code>private</code> mean for a class property?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Accessible from anywhere</div>
+    <div class="opt correct"><span class="label">B.</span> Accessible only within the class itself</div>
+    <div class="opt"><span class="label">C.</span> Accessible within class and all subclasses</div>
+    <div class="opt"><span class="label">D.</span> Cannot be read or written at all</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q13 to Q16</span><br>
+  <strong>Karim</strong> builds a grade calculator. He writes PHP functions using typed parameters and switch statements to return letter grades.
+</div>
+
+<div class="question-block">
+  <div class="q-text">13. Karim defines: <code>function addNumbers(int $a, int $b){return $a+$b;} echo addNumbers(5,'3');</code> (no strict mode). Output?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> 8</div>
+    <div class="opt"><span class="label">B.</span> Fatal type error</div>
+    <div class="opt"><span class="label">C.</span> '53'</div>
+    <div class="opt"><span class="label">D.</span> null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">14. Karim adds <code>declare(strict_types=1);</code> and calls <code>addNumbers(5,"5 days")</code>. What happens?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Returns 10</div>
+    <div class="opt"><span class="label">B.</span> Returns "5 days5"</div>
+    <div class="opt correct"><span class="label">C.</span> Fatal TypeError is thrown</div>
+    <div class="opt"><span class="label">D.</span> Returns null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">15. Karim writes: <code>function setHeight(int $h = 50){echo $h;} setHeight();</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 0</div>
+    <div class="opt"><span class="label">B.</span> Error — argument required</div>
+    <div class="opt correct"><span class="label">C.</span> 50</div>
+    <div class="opt"><span class="label">D.</span> null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">16. A function is defined as <code>function sum(float $a, float $b): int</code>. What does this mean?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Accepts integers and returns float</div>
+    <div class="opt correct"><span class="label">B.</span> Accepts floats and returns an integer</div>
+    <div class="opt"><span class="label">C.</span> Accepts and returns float values only</div>
+    <div class="opt"><span class="label">D.</span> Accepts any type and returns string</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q17 to Q20</span><br>
+  <strong>Nadia</strong> develops a student portal login form. She builds an HTML form with student ID and password fields and must choose the correct HTTP method, handle data securely, and validate all inputs.
+</div>
+
+<div class="question-block">
+  <div class="q-text">17. Which HTTP method should Nadia use for submitting a login form with a password?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> GET — data is visible in URL for debugging</div>
+    <div class="opt correct"><span class="label">B.</span> POST — parameters not stored in browser history or URL</div>
+    <div class="opt"><span class="label">C.</span> Either GET or POST — no difference for passwords</div>
+    <div class="opt"><span class="label">D.</span> GET is faster so it should be preferred</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">18. To access a URL parameter from <code>http://localhost/welcome.php?key=xyz</code>, which syntax is valid?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_POST['key']</div>
+    <div class="opt"><span class="label">B.</span> $_FILES['key']</div>
+    <div class="opt"><span class="label">C.</span> $_GET['key'] only</div>
+    <div class="opt correct"><span class="label">D.</span> Both $_GET['key'] and $_REQUEST['key']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">19. Nadia uses <code>htmlspecialchars($_SERVER["PHP_SELF"])</code> in the form action. Why?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> To redirect to a new page</div>
+    <div class="opt correct"><span class="label">B.</span> To prevent XSS (cross-site scripting) attacks</div>
+    <div class="opt"><span class="label">C.</span> To enable file uploads</div>
+    <div class="opt"><span class="label">D.</span> To switch from POST to GET method</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">20. Nadia uses <code>empty($_POST["username"])</code>. When does this return TRUE?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> When username = "admin"</div>
+    <div class="opt"><span class="label">B.</span> When username = "0"  only</div>
+    <div class="opt correct"><span class="label">C.</span> When username is "", NULL, 0, FALSE, or not set</div>
+    <div class="opt"><span class="label">D.</span> When username is any string value</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q21 to Q24</span><br>
+  <strong>Mona</strong> builds an inventory management system. She validates product codes, checks string lengths, and uses regex to enforce naming conventions entered by warehouse staff.
+</div>
+
+<div class="question-block">
+  <div class="q-text">21. Mona needs to validate that <code>$email</code> contains "@". Most suitable function?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> strcmp()</div>
+    <div class="opt correct"><span class="label">B.</span> strpos()</div>
+    <div class="opt"><span class="label">C.</span> substr()</div>
+    <div class="opt"><span class="label">D.</span> strlen()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">22. To validate a proper email format, which function is most appropriate?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> preg_match('/^[\w]+$/', $email)</div>
+    <div class="opt correct"><span class="label">B.</span> filter_var($email, FILTER_VALIDATE_EMAIL)</div>
+    <div class="opt"><span class="label">C.</span> is_string($email)</div>
+    <div class="opt"><span class="label">D.</span> ctype_alpha($email)</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">23. Mona writes <code>$str="hello"; echo $str[-1];</code>. What is output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> h</div>
+    <div class="opt correct"><span class="label">B.</span> o</div>
+    <div class="opt"><span class="label">C.</span> Error</div>
+    <div class="opt"><span class="label">D.</span> null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">24. Which regex pattern validates that a name contains only letters and whitespace?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> /^[0-9]*$/</div>
+    <div class="opt correct"><span class="label">B.</span> /^[a-zA-Z ]*$/</div>
+    <div class="opt"><span class="label">C.</span> /^[a-z]+$/</div>
+    <div class="opt"><span class="label">D.</span> /^[\w\d]*$/</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q25 to Q28</span><br>
+  <strong>The "Sweet Loaf" bakery</strong> has a recipe-submission website. The form works for text fields but when customers submit a cupcake photo, the server receives no file data.
+</div>
+
+<div class="question-block">
+  <div class="q-text">25. What is the most likely cause of the broken image upload?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The file input is missing the required attribute</div>
+    <div class="opt correct"><span class="label">B.</span> The form is missing <code>enctype="multipart/form-data"</code></div>
+    <div class="opt"><span class="label">C.</span> PHP has file_uploads set to Off</div>
+    <div class="opt"><span class="label">D.</span> The form method="post" is incorrect</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">26. Once the form is fixed, where is the uploaded image FIRST placed?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The same directory as upload.php</div>
+    <div class="opt"><span class="label">B.</span> A folder named /uploads/ on the server root</div>
+    <div class="opt correct"><span class="label">C.</span> PHP server temporary storage</div>
+    <div class="opt"><span class="label">D.</span> A special database table</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">27. Details about the uploaded file (original name, size) are found in which superglobal?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_POST</div>
+    <div class="opt"><span class="label">B.</span> $_GET</div>
+    <div class="opt correct"><span class="label">C.</span> $_FILES</div>
+    <div class="opt"><span class="label">D.</span> $_REQUEST</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">28. To securely move the uploaded file to a gallery folder, the script must use:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> copy() on $_FILES['image']['name']</div>
+    <div class="opt"><span class="label">B.</span> Check ['type'] then use fwrite()</div>
+    <div class="opt correct"><span class="label">C.</span> move_uploaded_file() on $_FILES['image']['tmp_name']</div>
+    <div class="opt"><span class="label">D.</span> Read $_POST['image'] and save as file</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q29 to Q32</span><br>
+  <strong>Reza</strong> builds a user preference system for an e-commerce site. He stores the user's theme preference ("dark" or "light") using a cookie so it persists across browser sessions.
+</div>
+
+<div class="question-block">
+  <div class="q-text">29. Reza writes: <code>setcookie("theme","dark",time()+(86400*30),"/");</code>. How long will this cookie last?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 1 day</div>
+    <div class="opt"><span class="label">B.</span> 7 days</div>
+    <div class="opt correct"><span class="label">C.</span> 30 days</div>
+    <div class="opt"><span class="label">D.</span> 365 days</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">30. Reza needs to DELETE the "theme" cookie. What is the correct approach?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> unset($_COOKIE["theme"]);</div>
+    <div class="opt correct"><span class="label">B.</span> setcookie("theme", "", time() - 3600);</div>
+    <div class="opt"><span class="label">C.</span> delete_cookie("theme");</div>
+    <div class="opt"><span class="label">D.</span> $_COOKIE["theme"] = null;</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">31. If a cookie is set without specifying an expiration time, what happens?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Cookie is stored permanently until manually deleted</div>
+    <div class="opt correct"><span class="label">B.</span> Cookie lasts only for the current browser session</div>
+    <div class="opt"><span class="label">C.</span> Cookie expires immediately</div>
+    <div class="opt"><span class="label">D.</span> Cookie defaults to 24-hour expiration</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">32. Where must the <code>setcookie()</code> function be placed in the PHP script?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> After the &lt;body&gt; tag</div>
+    <div class="opt correct"><span class="label">B.</span> BEFORE any HTML output, including the &lt;html&gt; tag</div>
+    <div class="opt"><span class="label">C.</span> Inside the HTML &lt;head&gt; section</div>
+    <div class="opt"><span class="label">D.</span> At the very end of the file</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q33 to Q36</span><br>
+  <strong>Lina</strong> builds a multi-page registration form for a university portal. She uses PHP sessions to pass user data between pages so the user doesn't need to retype information.
+</div>
+
+<div class="question-block">
+  <div class="q-text">33. What must Lina call first — before any HTML — on each page that uses session data?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> session_destroy()</div>
+    <div class="opt"><span class="label">B.</span> session_register()</div>
+    <div class="opt correct"><span class="label">C.</span> session_start()</div>
+    <div class="opt"><span class="label">D.</span> session_open()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">34. Lina sets a session variable: which global variable holds session data?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_COOKIE</div>
+    <div class="opt"><span class="label">B.</span> $SESSION</div>
+    <div class="opt correct"><span class="label">C.</span> $_SESSION</div>
+    <div class="opt"><span class="label">D.</span> $_GLOBALS["session"]</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">35. Which function removes all session variables but does NOT destroy the session itself?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> session_unset()</div>
+    <div class="opt"><span class="label">B.</span> session_destroy()</div>
+    <div class="opt"><span class="label">C.</span> unset($_SESSION)</div>
+    <div class="opt"><span class="label">D.</span> clearstatcache()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">36. Session data differs from cookie data because sessions are stored:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> In the user's browser as a file</div>
+    <div class="opt"><span class="label">B.</span> In the user's localStorage</div>
+    <div class="opt correct"><span class="label">C.</span> On the server</div>
+    <div class="opt"><span class="label">D.</span> In a database automatically</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q37 to Q40</span><br>
+  <strong>Omar</strong> is developing a student records system that reads and writes student data to text files and JSON files on the server.
+</div>
+
+<div class="question-block">
+  <div class="q-text">37. Omar wants to APPEND new data to an existing text file without erasing it. Which file mode?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> "r"</div>
+    <div class="opt"><span class="label">B.</span> "w"</div>
+    <div class="opt correct"><span class="label">C.</span> "a"</div>
+    <div class="opt"><span class="label">D.</span> "x"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">38. Omar opens a file with mode "w" but the file already has data. What happens to the existing content?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> New data is appended at the end</div>
+    <div class="opt correct"><span class="label">B.</span> Existing data is ERASED</div>
+    <div class="opt"><span class="label">C.</span> The file is locked; write fails</div>
+    <div class="opt"><span class="label">D.</span> An error is thrown</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">39. To encode a PHP array as a JSON string, Omar uses:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> json_decode()</div>
+    <div class="opt correct"><span class="label">B.</span> json_encode()</div>
+    <div class="opt"><span class="label">C.</span> serialize()</div>
+    <div class="opt"><span class="label">D.</span> json_stringify()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">40. Omar reads a JSON file with <code>file_get_contents()</code>. To convert it into a PHP associative array he uses:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> json_encode($str)</div>
+    <div class="opt correct"><span class="label">B.</span> json_decode($str, true)</div>
+    <div class="opt"><span class="label">C.</span> json_parse($str)</div>
+    <div class="opt"><span class="label">D.</span> array_json($str)</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q41 to Q44</span><br>
+  <strong>The librarian analogy:</strong> A student asks the librarian for their issued books list. The librarian quietly checks the records, writes the titles on a slip, and hands it to the student. Later, the records room is locked.
+</div>
+
+<div class="question-block">
+  <div class="q-text">41. The librarian quietly checking the records best represents:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Background (AJAX) request to server</div>
+    <div class="opt"><span class="label">B.</span> CSS styling of the page</div>
+    <div class="opt"><span class="label">C.</span> Static content delivery</div>
+    <div class="opt"><span class="label">D.</span> Client-side cache</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">42. The slip with the book titles represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Static HTML page</div>
+    <div class="opt"><span class="label">B.</span> User interface design</div>
+    <div class="opt"><span class="label">C.</span> Database schema</div>
+    <div class="opt correct"><span class="label">D.</span> Response data from the server</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">43. The librarian preparing the slip from the records represents:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Server-side processing</div>
+    <div class="opt"><span class="label">B.</span> CSS styling</div>
+    <div class="opt"><span class="label">C.</span> Client-side validation</div>
+    <div class="opt"><span class="label">D.</span> JavaScript DOM events</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">44. The locked records room illustrates:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Optional styling</div>
+    <div class="opt"><span class="label">B.</span> Client-side error</div>
+    <div class="opt"><span class="label">C.</span> Browser rendering issue</div>
+    <div class="opt correct"><span class="label">D.</span> Server/database dependency failure</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q45 to Q48 (MVC Restaurant)</span><br>
+  A customer asks a waiter for today's dessert menu. The waiter checks the chef's order board (updated from a recipe book), writes them on a card, gives it to the customer. The customer picks "chocolate cake." The waiter tells the chef, who prepares it using the recipe book. Later, the recipe book is misplaced.
+</div>
+
+<div class="question-block">
+  <div class="q-text">45. The recipe book that stores dessert recipes and availability best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> View</div>
+    <div class="opt"><span class="label">B.</span> Controller</div>
+    <div class="opt correct"><span class="label">C.</span> Model</div>
+    <div class="opt"><span class="label">D.</span> Router</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">46. The waiter writing the dessert list on a small card for the customer best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Model updating</div>
+    <div class="opt correct"><span class="label">B.</span> View rendering</div>
+    <div class="opt"><span class="label">C.</span> Controller logic</div>
+    <div class="opt"><span class="label">D.</span> Database query</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">47. The waiter taking the customer's choice and telling the chef to prepare it best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Front-end styling</div>
+    <div class="opt correct"><span class="label">B.</span> Controller handling input</div>
+    <div class="opt"><span class="label">C.</span> Model validation</div>
+    <div class="opt"><span class="label">D.</span> Static HTML</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">48. The misplaced recipe book (preventing dessert preparation) best illustrates:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Client-side error</div>
+    <div class="opt correct"><span class="label">B.</span> Model/data unavailability</div>
+    <div class="opt"><span class="label">C.</span> View rendering failure</div>
+    <div class="opt"><span class="label">D.</span> CSS issue</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q49 to Q52</span><br>
+  <strong>Hasan</strong> is building an AJAX-powered search bar. When a user types in the search box, relevant products appear without the page refreshing.
+</div>
+
+<div class="question-block">
+  <div class="q-text">49. Which object is the foundation of all AJAX requests in a browser?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> DocumentRequest</div>
+    <div class="opt correct"><span class="label">B.</span> XMLHttpRequest</div>
+    <div class="opt"><span class="label">C.</span> HttpFetch</div>
+    <div class="opt"><span class="label">D.</span> AjaxObject</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">50. In Hasan's AJAX code, when readyState == 4 and status == 200, it means:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Request is initializing</div>
+    <div class="opt"><span class="label">B.</span> Request was forbidden</div>
+    <div class="opt correct"><span class="label">C.</span> Response is ready and OK</div>
+    <div class="opt"><span class="label">D.</span> Server is processing the request</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">51. Hasan sets async to <code>false</code>. What is the effect?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Faster response time</div>
+    <div class="opt correct"><span class="label">B.</span> Browser becomes unresponsive until the request completes</div>
+    <div class="opt"><span class="label">C.</span> No difference from async=true</div>
+    <div class="opt"><span class="label">D.</span> The request is cancelled</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">52. To send POST data like a form via AJAX (e.g., fname=Henry), Hasan must also call:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> xhttp.send("fname=Henry") only</div>
+    <div class="opt correct"><span class="label">B.</span> xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded") AND xhttp.send("fname=Henry")</div>
+    <div class="opt"><span class="label">C.</span> xhttp.open("POST",...) only</div>
+    <div class="opt"><span class="label">D.</span> xhttp.setContentType() only</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q53 to Q56</span><br>
+  <strong>Tanya</strong> is implementing jQuery in a student voting portal. She wants to hide elements, handle click events, and change CSS dynamically without writing verbose JavaScript.
+</div>
+
+<div class="question-block">
+  <div class="q-text">53. Tanya writes <code>$(".vote-btn").hide();</code>. What does this do?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Hides ALL elements with class="vote-btn"</div>
+    <div class="opt"><span class="label">B.</span> Hides the element with id="vote-btn"</div>
+    <div class="opt"><span class="label">C.</span> Hides all &lt;div&gt; elements</div>
+    <div class="opt"><span class="label">D.</span> Hides only the first element with that class</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">54. What is the jQuery basic syntax?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> jQuery(element).do()</div>
+    <div class="opt correct"><span class="label">B.</span> $(selector).action()</div>
+    <div class="opt"><span class="label">C.</span> jQ(id).method()</div>
+    <div class="opt"><span class="label">D.</span> #(selector).run()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">55. Tanya wants to run code ONLY after the entire DOM is fully loaded. She should use:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> window.onload = function(){}</div>
+    <div class="opt correct"><span class="label">B.</span> $(document).ready(function(){})</div>
+    <div class="opt"><span class="label">C.</span> $("body").load(function(){})</div>
+    <div class="opt"><span class="label">D.</span> $.ready(function(){})</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">56. The jQuery <code>hover()</code> method combines which two events?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> click() and dblclick()</div>
+    <div class="opt correct"><span class="label">B.</span> mouseenter() and mouseleave()</div>
+    <div class="opt"><span class="label">C.</span> focus() and blur()</div>
+    <div class="opt"><span class="label">D.</span> mousedown() and mouseup()</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q57 to Q60</span><br>
+  <strong>Fatima</strong> is learning PHP loops. She writes various loop types to generate HTML tables, factorial calculations, and iterating over associative arrays of students.
+</div>
+
+<div class="question-block">
+  <div class="q-text">57. Fatima writes a <code>while</code> loop but forgets the increment: <code>$i=1; while($i&lt;=5){echo $i;}</code>. What happens?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Outputs "12345"</div>
+    <div class="opt"><span class="label">B.</span> Outputs "1" once</div>
+    <div class="opt correct"><span class="label">C.</span> Infinite loop</div>
+    <div class="opt"><span class="label">D.</span> Syntax error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">58. Which loop type always executes its body AT LEAST ONCE regardless of condition?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> for</div>
+    <div class="opt"><span class="label">B.</span> while</div>
+    <div class="opt correct"><span class="label">C.</span> do...while</div>
+    <div class="opt"><span class="label">D.</span> foreach</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">59. Fatima writes: <code>for($x=0; $x&lt;=3; $x++){echo $x;}</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 123</div>
+    <div class="opt correct"><span class="label">B.</span> 0123</div>
+    <div class="opt"><span class="label">C.</span> 1234</div>
+    <div class="opt"><span class="label">D.</span> 012</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">60. Which loop type ONLY works on arrays in PHP?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> for</div>
+    <div class="opt"><span class="label">B.</span> while</div>
+    <div class="opt"><span class="label">C.</span> do...while</div>
+    <div class="opt correct"><span class="label">D.</span> foreach</div>
+  </div>
+</div>
+
+<!-- Q61-Q80: Concept Questions -->
+<div class="scenario">
+  <span class="group-label">Concept Questions — Q61 to Q80</span>
+</div>
+
+<div class="question-block">
+  <div class="q-text">61. The PHP <code>$_REQUEST</code> superglobal typically contains the contents of:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_GET and $_POST only</div>
+    <div class="opt correct"><span class="label">B.</span> $_GET, $_POST, and $_COOKIE</div>
+    <div class="opt"><span class="label">C.</span> $_SESSION only</div>
+    <div class="opt"><span class="label">D.</span> $_FILES and $_ENV</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">62. PHP is described as a "loosely typed language." This means:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Variables must be declared with a type like C or Java</div>
+    <div class="opt correct"><span class="label">B.</span> PHP automatically assigns data types to variables</div>
+    <div class="opt"><span class="label">C.</span> PHP only supports string and integer types</div>
+    <div class="opt"><span class="label">D.</span> All variables are treated as strings</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">63. A PHP file saved as <code>HelloWorld.php</code> in XAMPP's htdocs should be accessed via:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> file://HelloWorld.php</div>
+    <div class="opt correct"><span class="label">B.</span> http://localhost/HelloWorld.php</div>
+    <div class="opt"><span class="label">C.</span> ftp://localhost/HelloWorld.php</div>
+    <div class="opt"><span class="label">D.</span> C:\xampp\HelloWorld.php</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">64. The difference between <code>include</code> and <code>require</code> in PHP is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> include is faster than require</div>
+    <div class="opt correct"><span class="label">B.</span> require produces a fatal error on failure; include only produces a warning</div>
+    <div class="opt"><span class="label">C.</span> require only works with .php files</div>
+    <div class="opt"><span class="label">D.</span> include can only be used once per file</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">65. What does <code>var_dump(null)</code> output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> string(0) ""</div>
+    <div class="opt"><span class="label">B.</span> bool(false)</div>
+    <div class="opt correct"><span class="label">C.</span> NULL</div>
+    <div class="opt"><span class="label">D.</span> int(0)</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">66. In PHP, which of the following evaluates to <code>empty()</code> as TRUE?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> "hello"</div>
+    <div class="opt"><span class="label">B.</span> 1</div>
+    <div class="opt correct"><span class="label">C.</span> "0"</div>
+    <div class="opt"><span class="label">D.</span> true</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">67. What is the output of: <code>$x=10; $y=3; echo $x % $y;</code></div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 3</div>
+    <div class="opt correct"><span class="label">B.</span> 1</div>
+    <div class="opt"><span class="label">C.</span> 3.33</div>
+    <div class="opt"><span class="label">D.</span> 0</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">68. PHP keywords like <code>echo</code>, <code>if</code>, <code>while</code> are:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Case-insensitive</div>
+    <div class="opt"><span class="label">B.</span> Case-sensitive — must be lowercase</div>
+    <div class="opt"><span class="label">C.</span> Case-sensitive — must be uppercase</div>
+    <div class="opt"><span class="label">D.</span> Case-sensitive only for echo</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">69. Which PHP array function removes and returns the LAST element?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> array_shift()</div>
+    <div class="opt correct"><span class="label">B.</span> array_pop()</div>
+    <div class="opt"><span class="label">C.</span> array_unshift()</div>
+    <div class="opt"><span class="label">D.</span> array_push()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">70. The GET method has a URL length limit of approximately:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 512 characters</div>
+    <div class="opt"><span class="label">B.</span> 4096 characters</div>
+    <div class="opt correct"><span class="label">C.</span> 2048 characters</div>
+    <div class="opt"><span class="label">D.</span> 8000 characters</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">71. AJAX stands for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Active JavaScript And XHTML</div>
+    <div class="opt correct"><span class="label">B.</span> Asynchronous JavaScript And XML</div>
+    <div class="opt"><span class="label">C.</span> Automated JavaScript Application eXchange</div>
+    <div class="opt"><span class="label">D.</span> Advanced Java And XML</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">72. In MVC, which component contains the business logic?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Model — it stores all logic</div>
+    <div class="opt"><span class="label">B.</span> View — it processes user requests</div>
+    <div class="opt correct"><span class="label">C.</span> Controller — it intercepts requests and links Model and View</div>
+    <div class="opt"><span class="label">D.</span> Router — it handles all logic</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">73. Which PHP function checks if a variable is declared AND is not NULL?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> empty()</div>
+    <div class="opt correct"><span class="label">B.</span> isset()</div>
+    <div class="opt"><span class="label">C.</span> is_null()</div>
+    <div class="opt"><span class="label">D.</span> defined()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">74. Which function converts a PHP array into a JSON string?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> json_encode()</div>
+    <div class="opt"><span class="label">B.</span> json_decode()</div>
+    <div class="opt"><span class="label">C.</span> json_stringify()</div>
+    <div class="opt"><span class="label">D.</span> array_to_json()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">75. JSON differs from XML because JSON:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Cannot be parsed by most programming languages</div>
+    <div class="opt"><span class="label">B.</span> Requires end tags for every element</div>
+    <div class="opt correct"><span class="label">C.</span> Is shorter, has no end tags, supports arrays</div>
+    <div class="opt"><span class="label">D.</span> Can only store string values</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">76. The jQuery <code>on()</code> method is used to:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Turn on jQuery in the browser</div>
+    <div class="opt correct"><span class="label">B.</span> Attach one or more event handlers to selected elements</div>
+    <div class="opt"><span class="label">C.</span> Activate an element's CSS</div>
+    <div class="opt"><span class="label">D.</span> Open an AJAX connection</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">77. Which XMLHttpRequest readyState value means "request received by server"?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 0</div>
+    <div class="opt"><span class="label">B.</span> 1</div>
+    <div class="opt correct"><span class="label">C.</span> 2</div>
+    <div class="opt"><span class="label">D.</span> 4</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">78. Which PHP function reads an entire file into a string?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> file_write_contents()</div>
+    <div class="opt correct"><span class="label">B.</span> file_get_contents()</div>
+    <div class="opt"><span class="label">C.</span> fread_all()</div>
+    <div class="opt"><span class="label">D.</span> readfile_string()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">79. Which is a popular PHP MVC framework?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> React</div>
+    <div class="opt"><span class="label">B.</span> Angular</div>
+    <div class="opt correct"><span class="label">C.</span> Laravel</div>
+    <div class="opt"><span class="label">D.</span> Express.js</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">80. To check if cookies are enabled in PHP, you can:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Check <code>count($_COOKIE) &gt; 0</code> after setting a test cookie</div>
+    <div class="opt"><span class="label">B.</span> Use <code>cookie_enabled()</code></div>
+    <div class="opt"><span class="label">C.</span> Check <code>isset($_COOKIE)</code> directly</div>
+    <div class="opt"><span class="label">D.</span> Use <code>headers_sent()</code></div>
+  </div>
+</div>
+
+<!-- Q81–Q120: More Scenarios -->
+<div class="scenario">
+  <span class="group-label">Scenario — Q81 to Q84</span><br>
+  <strong>Arif</strong> builds a classroom attendance system. He uses an associative array to map student names to attendance booleans and uses switch-case for grade classification.
+</div>
+
+<div class="question-block">
+  <div class="q-text">81. Arif writes: <code>$price=800; if($price&gt;1000){echo 'Premium';} elseif($price&gt;500){echo 'Mid';} else{echo 'Budget';}</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Premium</div>
+    <div class="opt correct"><span class="label">B.</span> Mid</div>
+    <div class="opt"><span class="label">C.</span> Budget</div>
+    <div class="opt"><span class="label">D.</span> Nothing</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">82. In a switch statement, what happens if no <code>break</code> is used?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Only the matching case executes</div>
+    <div class="opt correct"><span class="label">B.</span> Execution falls through to subsequent cases</div>
+    <div class="opt"><span class="label">C.</span> A syntax error is thrown</div>
+    <div class="opt"><span class="label">D.</span> The default case runs only</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">83. Arif has <code>$arr = ['a','b','c']; echo $arr[1];</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> a</div>
+    <div class="opt correct"><span class="label">B.</span> b</div>
+    <div class="opt"><span class="label">C.</span> c</div>
+    <div class="opt"><span class="label">D.</span> null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">84. Arif uses <code>in_array("Alice", $students)</code>. This returns TRUE when:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> "Alice" exists in the $students array</div>
+    <div class="opt"><span class="label">B.</span> "Alice" is the first element only</div>
+    <div class="opt"><span class="label">C.</span> $students is empty</div>
+    <div class="opt"><span class="label">D.</span> "Alice" matches the array key</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q85 to Q88</span><br>
+  <strong>Zara</strong> is working on an XML-based product catalog. She reads product data from an XML file and also learns to create XML programmatically.
+</div>
+
+<div class="question-block">
+  <div class="q-text">85. To load an XML file into a PHP SimpleXML object, Zara should use:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> simplexml_load_file()</div>
+    <div class="opt"><span class="label">B.</span> xml_load()</div>
+    <div class="opt"><span class="label">C.</span> DOMDocument::load()</div>
+    <div class="opt"><span class="label">D.</span> fopen() with XML mode</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">86. Zara creates an XML element: <code>$sxml = new SimpleXMLElement('&lt;?xml version="1.0"?&gt;&lt;books/&gt;');</code> and then calls <code>file_put_contents('books.xml', $sxml-&gt;asXML());</code>. This:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Reads the XML from books.xml</div>
+    <div class="opt correct"><span class="label">B.</span> Creates/writes the XML to a books.xml file</div>
+    <div class="opt"><span class="label">C.</span> Throws an error because PHP can't create XML</div>
+    <div class="opt"><span class="label">D.</span> Appends to books.xml</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">87. Both JSON and XML are similar because they are:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Human readable, hierarchical, and can be fetched with XMLHttpRequest</div>
+    <div class="opt"><span class="label">B.</span> Compiled before use</div>
+    <div class="opt"><span class="label">C.</span> Binary formats</div>
+    <div class="opt"><span class="label">D.</span> Only readable by PHP</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">88. JSON data types include all EXCEPT:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> String, Number, Boolean</div>
+    <div class="opt"><span class="label">B.</span> Array, Object, Null</div>
+    <div class="opt correct"><span class="label">C.</span> Date (dedicated date type)</div>
+    <div class="opt"><span class="label">D.</span> All of the above are valid JSON types</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q89 to Q92</span><br>
+  <strong>Bilal</strong> builds a pass-by-reference function in PHP to swap two variables without returning values, and also experiments with strict types.
+</div>
+
+<div class="question-block">
+  <div class="q-text">89. Bilal writes: <code>function swap(&amp;$a, &amp;$b){$t=$a; $a=$b; $b=$t;} $x=5; $y=10; swap($x,$y); echo $x;</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 5</div>
+    <div class="opt correct"><span class="label">B.</span> 10</div>
+    <div class="opt"><span class="label">C.</span> 15</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">90. What does the <code>&amp;</code> symbol mean before a function parameter in PHP?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The parameter is required</div>
+    <div class="opt correct"><span class="label">B.</span> The parameter is passed by reference (original variable is modified)</div>
+    <div class="opt"><span class="label">C.</span> The parameter is a global variable</div>
+    <div class="opt"><span class="label">D.</span> The parameter is a boolean</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">91. To enable strict type checking globally in a PHP file, you write at the top:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> declare(strict_types=1);</div>
+    <div class="opt"><span class="label">B.</span> set_strict_types(true);</div>
+    <div class="opt"><span class="label">C.</span> php.strict = on;</div>
+    <div class="opt"><span class="label">D.</span> define("STRICT", true);</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">92. A function defined as <code>function calculate(int $a, int $b): int</code> — what is the return type?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> float</div>
+    <div class="opt correct"><span class="label">B.</span> int</div>
+    <div class="opt"><span class="label">C.</span> string</div>
+    <div class="opt"><span class="label">D.</span> bool</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q93 to Q96</span><br>
+  <strong>Nour</strong> is refactoring a large PHP project to use MVC. She separates database queries into Model files, HTML/CSS templates into View files, and business logic into Controller files.
+</div>
+
+<div class="question-block">
+  <div class="q-text">93. In MVC, which layer is responsible for fetching data from the database?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Model</div>
+    <div class="opt"><span class="label">B.</span> View</div>
+    <div class="opt"><span class="label">C.</span> Controller</div>
+    <div class="opt"><span class="label">D.</span> Router</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">94. In MVC, the user interface (HTML/CSS that the user sees) belongs to the:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Model</div>
+    <div class="opt correct"><span class="label">B.</span> View</div>
+    <div class="opt"><span class="label">C.</span> Controller</div>
+    <div class="opt"><span class="label">D.</span> Router</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">95. An advantage of MVC is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The application becomes harder to update</div>
+    <div class="opt"><span class="label">B.</span> Multiple developers cannot work simultaneously</div>
+    <div class="opt correct"><span class="label">C.</span> Clear separation of concerns makes the code easier to debug and maintain</div>
+    <div class="opt"><span class="label">D.</span> No need for a database</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">96. A disadvantage of MVC architecture is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Code cannot be reused</div>
+    <div class="opt correct"><span class="label">B.</span> The pattern can be difficult to understand initially and requires strict rules</div>
+    <div class="opt"><span class="label">C.</span> It only works with small applications</div>
+    <div class="opt"><span class="label">D.</span> No PHP framework supports it</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q97 to Q100</span><br>
+  <strong>Tariq</strong> builds an online quiz. After login, he stores the user's score in a session and displays it on the results page.
+</div>
+
+<div class="question-block">
+  <div class="q-text">97. Tariq needs to store the score across pages. Which is most appropriate?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> A hidden form field</div>
+    <div class="opt"><span class="label">B.</span> A URL parameter</div>
+    <div class="opt correct"><span class="label">C.</span> A PHP session variable ($_SESSION)</div>
+    <div class="opt"><span class="label">D.</span> A JavaScript variable</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">98. Tariq wants to log the user out and clear ALL session data. He should call:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> session_end()</div>
+    <div class="opt"><span class="label">B.</span> unset($_SESSION) only</div>
+    <div class="opt correct"><span class="label">C.</span> session_unset() then session_destroy()</div>
+    <div class="opt"><span class="label">D.</span> session_close()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">99. Session variables are available:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Only on the page where they were created</div>
+    <div class="opt correct"><span class="label">B.</span> Across all pages of the application (within one session)</div>
+    <div class="opt"><span class="label">C.</span> Only if the user is logged in</div>
+    <div class="opt"><span class="label">D.</span> Only via HTTPS</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">100. To display all session variables currently set, Tariq should use:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> echo $_SESSION;</div>
+    <div class="opt correct"><span class="label">B.</span> print_r($_SESSION);</div>
+    <div class="opt"><span class="label">C.</span> var_dump("session");</div>
+    <div class="opt"><span class="label">D.</span> session_list();</div>
+  </div>
+</div>
+
+<!-- Q101–Q140 Mixed advanced -->
+<div class="scenario">
+  <span class="group-label">Scenario — Q101 to Q104</span><br>
+  <strong>Maryam</strong> builds a live chat feature using AJAX. Messages are sent to the server without page reload, and new messages appear in real time.
+</div>
+
+<div class="question-block">
+  <div class="q-text">101. Maryam's AJAX sends a GET request: <code>xhttp.open("GET","get_msg.php?room=1",true);</code>. The third parameter <code>true</code> means:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Use HTTPS</div>
+    <div class="opt correct"><span class="label">B.</span> Request is asynchronous</div>
+    <div class="opt"><span class="label">C.</span> Return response as XML</div>
+    <div class="opt"><span class="label">D.</span> Cache the response</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">102. Maryam's PHP script returns JSON. To parse it in JavaScript she uses:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> JSON.parse(xhttp.responseText)</div>
+    <div class="opt"><span class="label">B.</span> json_decode(xhttp.responseText)</div>
+    <div class="opt"><span class="label">C.</span> JSON.stringify(xhttp.responseText)</div>
+    <div class="opt"><span class="label">D.</span> xhttp.responseJSON</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">103. To avoid sending cached GET results, Maryam adds a random parameter. She writes:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> xhttp.open("GET","get_msg.php?t="+Math.random(),true);</div>
+    <div class="opt"><span class="label">B.</span> xhttp.noCache = true;</div>
+    <div class="opt"><span class="label">C.</span> xhttp.open("GET","get_msg.php",false);</div>
+    <div class="opt"><span class="label">D.</span> xhttp.send("cache=false");</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">104. Which AJAX property returns the server response as a plain string?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> responseText</div>
+    <div class="opt"><span class="label">B.</span> responseXML</div>
+    <div class="opt"><span class="label">C.</span> responseData</div>
+    <div class="opt"><span class="label">D.</span> responseJSON</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q105 to Q108</span><br>
+  <strong>Yousuf</strong> is studying PHP data types and string functions. He writes test scripts to understand how PHP handles type juggling and string operations.
+</div>
+
+<div class="question-block">
+  <div class="q-text">105. Yousuf runs: <code>$x = "5"; $y = 3; echo $x + $y;</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> "53"</div>
+    <div class="opt correct"><span class="label">B.</span> 8</div>
+    <div class="opt"><span class="label">C.</span> Error</div>
+    <div class="opt"><span class="label">D.</span> "5+3"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">106. Yousuf uses <code>strlen("hello world");</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 10</div>
+    <div class="opt correct"><span class="label">B.</span> 11</div>
+    <div class="opt"><span class="label">C.</span> 5</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">107. <code>strpos("Hello World", "World")</code> returns:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 0</div>
+    <div class="opt"><span class="label">B.</span> true</div>
+    <div class="opt correct"><span class="label">C.</span> 6</div>
+    <div class="opt"><span class="label">D.</span> false</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">108. What does <code>ctype_alnum("hello123")</code> return?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> true</div>
+    <div class="opt"><span class="label">B.</span> false</div>
+    <div class="opt"><span class="label">C.</span> 1</div>
+    <div class="opt"><span class="label">D.</span> "alphanumeric"</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q109 to Q112</span><br>
+  <strong>Hassan</strong> uses jQuery to build a dynamic product filter. Clicking a filter button shows/hides product cards. He also uses jQuery AJAX to load products without page refresh.
+</div>
+
+<div class="question-block">
+  <div class="q-text">109. Hassan writes <code>$(document).ready(function(){$("#filter").click(function(){$(".product").hide();});});</code>. What happens when #filter is clicked?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Only the #filter element is hidden</div>
+    <div class="opt"><span class="label">B.</span> The entire page is hidden</div>
+    <div class="opt correct"><span class="label">C.</span> All elements with class "product" are hidden</div>
+    <div class="opt"><span class="label">D.</span> Nothing — ready() prevents click events</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">110. Hassan wants to change the background color of an input when it receives focus. Correct jQuery?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> $("input").focus(function(){$(this).css("background-color","#ccc");})</div>
+    <div class="opt"><span class="label">B.</span> $("input").click(function(){$(this).background("#ccc");})</div>
+    <div class="opt"><span class="label">C.</span> $("input").css.focus("#ccc")</div>
+    <div class="opt"><span class="label">D.</span> jQuery.focus("input","#ccc")</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">111. Which jQuery selector selects an element with <code>id="header"</code>?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $(".header")</div>
+    <div class="opt correct"><span class="label">B.</span> $("#header")</div>
+    <div class="opt"><span class="label">C.</span> $("header")</div>
+    <div class="opt"><span class="label">D.</span> $("*header")</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">112. jQuery is described as a library for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Server-side scripting</div>
+    <div class="opt"><span class="label">B.</span> Database management</div>
+    <div class="opt correct"><span class="label">C.</span> Simplifying JavaScript for HTML/DOM manipulation, events, AJAX, animations</div>
+    <div class="opt"><span class="label">D.</span> Replacing PHP on the server</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q113 to Q116</span><br>
+  <strong>Saima</strong> writes a PHP registration form that validates user input on the same page using <code>$_SERVER["PHP_SELF"]</code> and uses the <code>test_input()</code> function.
+</div>
+
+<div class="question-block">
+  <div class="q-text">113. Saima uses <code>trim($data)</code> in <code>test_input()</code>. This function:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Removes leading and trailing whitespace from a string</div>
+    <div class="opt"><span class="label">B.</span> Trims the string to a maximum length</div>
+    <div class="opt"><span class="label">C.</span> Removes all spaces from a string</div>
+    <div class="opt"><span class="label">D.</span> Checks if the string is empty</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">114. Saima uses <code>stripslashes($data)</code>. This removes:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> HTML tags from the string</div>
+    <div class="opt"><span class="label">B.</span> All spaces from the string</div>
+    <div class="opt correct"><span class="label">C.</span> Backslashes from the string</div>
+    <div class="opt"><span class="label">D.</span> Numbers from the string</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">115. To prevent XSS (Cross-Site Scripting), Saima uses which function on user input?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> strip_tags()</div>
+    <div class="opt correct"><span class="label">B.</span> htmlspecialchars()</div>
+    <div class="opt"><span class="label">C.</span> md5()</div>
+    <div class="opt"><span class="label">D.</span> base64_encode()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">116. Saima validates a website URL using PHP. Which function is most suitable?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> is_url()</div>
+    <div class="opt"><span class="label">B.</span> validate_url()</div>
+    <div class="opt correct"><span class="label">C.</span> filter_var($url, FILTER_VALIDATE_URL) or preg_match()</div>
+    <div class="opt"><span class="label">D.</span> ctype_url()</div>
+  </div>
+</div>
+
+<!-- Q117-Q140 pure concept -->
+<div class="scenario">
+  <span class="group-label">Mixed Concept Questions — Q117 to Q140</span>
+</div>
+
+<div class="question-block">
+  <div class="q-text">117. Which superglobal stores file upload data?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_POST['file']</div>
+    <div class="opt correct"><span class="label">B.</span> $_FILES</div>
+    <div class="opt"><span class="label">C.</span> $_UPLOAD</div>
+    <div class="opt"><span class="label">D.</span> $_SERVER['file']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">118. For a file upload form, which attribute is REQUIRED in the &lt;form&gt; tag?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> action="upload.php"</div>
+    <div class="opt correct"><span class="label">B.</span> enctype="multipart/form-data"</div>
+    <div class="opt"><span class="label">C.</span> type="file"</div>
+    <div class="opt"><span class="label">D.</span> method="get"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">119. Which key of the $_FILES array holds the original filename?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> ['name']</div>
+    <div class="opt"><span class="label">B.</span> ['original']</div>
+    <div class="opt"><span class="label">C.</span> ['filename']</div>
+    <div class="opt"><span class="label">D.</span> ['source']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">120. Which key of the $_FILES array holds the path to the TEMPORARY file?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> ['name']</div>
+    <div class="opt"><span class="label">B.</span> ['type']</div>
+    <div class="opt"><span class="label">C.</span> ['size']</div>
+    <div class="opt correct"><span class="label">D.</span> ['tmp_name']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">121. What does the PHP $GLOBALS superglobal allow you to do?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Access global variables from anywhere, including inside functions</div>
+    <div class="opt"><span class="label">B.</span> Store session data globally</div>
+    <div class="opt"><span class="label">C.</span> Define constants accessible everywhere</div>
+    <div class="opt"><span class="label">D.</span> Access environment variables only</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">122. The PHP OOP principle "DRY" stands for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Define Reusable Yesterday</div>
+    <div class="opt correct"><span class="label">B.</span> Don't Repeat Yourself</div>
+    <div class="opt"><span class="label">C.</span> Dynamic Reuse for YAML</div>
+    <div class="opt"><span class="label">D.</span> Debug Reuse Yourself</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">123. Which function in PHP joins array elements into a string with a separator?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> explode()</div>
+    <div class="opt correct"><span class="label">B.</span> implode()</div>
+    <div class="opt"><span class="label">C.</span> join_array()</div>
+    <div class="opt"><span class="label">D.</span> concat()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">124. Which readyState value of XMLHttpRequest means "server connection established"?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 0</div>
+    <div class="opt correct"><span class="label">B.</span> 1</div>
+    <div class="opt"><span class="label">C.</span> 3</div>
+    <div class="opt"><span class="label">D.</span> 4</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">125. What HTTP status code means "Page Not Found"?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 200</div>
+    <div class="opt"><span class="label">B.</span> 403</div>
+    <div class="opt correct"><span class="label">C.</span> 404</div>
+    <div class="opt"><span class="label">D.</span> 500</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">126. In jQuery, which method attaches multiple event handlers at once to an element?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> bind()</div>
+    <div class="opt correct"><span class="label">B.</span> on()</div>
+    <div class="opt"><span class="label">C.</span> attach()</div>
+    <div class="opt"><span class="label">D.</span> multi()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">127. Which PHP function sorts an array in REVERSE order?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> sort()</div>
+    <div class="opt correct"><span class="label">B.</span> rsort()</div>
+    <div class="opt"><span class="label">C.</span> reverse_sort()</div>
+    <div class="opt"><span class="label">D.</span> asort()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">128. Which PHP statement produces a fatal error and stops script execution if a file is missing?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> include</div>
+    <div class="opt correct"><span class="label">B.</span> require</div>
+    <div class="opt"><span class="label">C.</span> import</div>
+    <div class="opt"><span class="label">D.</span> load</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">129. The <code>preg_match()</code> function returns:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The matched string</div>
+    <div class="opt correct"><span class="label">B.</span> 1 if a match is found, 0 if not</div>
+    <div class="opt"><span class="label">C.</span> An array of all matches</div>
+    <div class="opt"><span class="label">D.</span> TRUE or FALSE (boolean)</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">130. To prevent a file upload from creating a duplicate, you should check:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> If the file already exists using file_exists()</div>
+    <div class="opt"><span class="label">B.</span> $_FILES['file']['duplicate']</div>
+    <div class="opt"><span class="label">C.</span> isset($_FILES) only</div>
+    <div class="opt"><span class="label">D.</span> $_SERVER['FILE_EXISTS']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">131. Which PHP function splits a string into an array based on a delimiter?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> implode()</div>
+    <div class="opt correct"><span class="label">B.</span> explode()</div>
+    <div class="opt"><span class="label">C.</span> split_string()</div>
+    <div class="opt"><span class="label">D.</span> str_split_by()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">132. In PHP, what is the result of <code>is_null(null)</code>?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> true</div>
+    <div class="opt"><span class="label">B.</span> false</div>
+    <div class="opt"><span class="label">C.</span> 0</div>
+    <div class="opt"><span class="label">D.</span> "null"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">133. Which PHP file open mode creates a NEW file for write only and returns an error if the file already exists?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> "w"</div>
+    <div class="opt"><span class="label">B.</span> "a"</div>
+    <div class="opt correct"><span class="label">C.</span> "x"</div>
+    <div class="opt"><span class="label">D.</span> "r+"</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">134. The <code>JSON.stringify()</code> function in JavaScript:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Parses a JSON string into a JavaScript object</div>
+    <div class="opt correct"><span class="label">B.</span> Converts a JavaScript object into a JSON string</div>
+    <div class="opt"><span class="label">C.</span> Validates the format of a JSON file</div>
+    <div class="opt"><span class="label">D.</span> Fetches data from a JSON URL</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">135. Which PHP array function adds one or more elements to the BEGINNING of an array?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> array_push()</div>
+    <div class="opt"><span class="label">B.</span> array_pop()</div>
+    <div class="opt correct"><span class="label">C.</span> array_unshift()</div>
+    <div class="opt"><span class="label">D.</span> array_shift()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">136. XAMPP stands for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> XML, Apache, MySQL, PHP, Perl</div>
+    <div class="opt correct"><span class="label">B.</span> Cross-platform Apache, MariaDB/MySQL, PHP, Perl</div>
+    <div class="opt"><span class="label">C.</span> eXtra Apache MySQL PHP Package</div>
+    <div class="opt"><span class="label">D.</span> XML Application MySQL PHP Package</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">137. The <code>blur()</code> jQuery event fires when:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> An element is clicked</div>
+    <div class="opt correct"><span class="label">B.</span> A form field loses focus</div>
+    <div class="opt"><span class="label">C.</span> A form field gains focus</div>
+    <div class="opt"><span class="label">D.</span> A key is pressed</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">138. In PHP OOP, <code>$this</code> refers to:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The parent class</div>
+    <div class="opt correct"><span class="label">B.</span> The current object instance</div>
+    <div class="opt"><span class="label">C.</span> The static class method</div>
+    <div class="opt"><span class="label">D.</span> The constructor function</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">139. Which function in PHP puts elements of an array in random order?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> random_sort()</div>
+    <div class="opt correct"><span class="label">B.</span> shuffle()</div>
+    <div class="opt"><span class="label">C.</span> mix()</div>
+    <div class="opt"><span class="label">D.</span> rand_array()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">140. The purpose of the <code>onreadystatechange</code> property in AJAX is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> To open the HTTP connection</div>
+    <div class="opt correct"><span class="label">B.</span> To define a function that executes every time readyState changes</div>
+    <div class="opt"><span class="label">C.</span> To set the URL of the request</div>
+    <div class="opt"><span class="label">D.</span> To cancel the request</div>
+  </div>
+</div>
+
+<!-- Q141–Q160 -->
+<div class="scenario">
+  <span class="group-label">Scenario — Q141 to Q144</span><br>
+  <strong>Simra</strong> is building a photo-sharing site. She needs to enforce file type restrictions (JPEG, PNG only) and size limits (max 4MB) during upload.
+</div>
+
+<div class="question-block">
+  <div class="q-text">141. To check the file MIME type of an uploaded image, Simra should look at:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_FILES['photo']['name']</div>
+    <div class="opt correct"><span class="label">B.</span> $_FILES['photo']['type']</div>
+    <div class="opt"><span class="label">C.</span> $_FILES['photo']['size']</div>
+    <div class="opt"><span class="label">D.</span> $_FILES['photo']['tmp_name']</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">142. To check the SIZE of the uploaded file, Simra uses:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_FILES['photo']['name']</div>
+    <div class="opt"><span class="label">B.</span> $_FILES['photo']['type']</div>
+    <div class="opt correct"><span class="label">C.</span> $_FILES['photo']['size']</div>
+    <div class="opt"><span class="label">D.</span> filesize($_FILES['photo']['tmp_name'])</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">143. 4MB in bytes equals:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 4000000</div>
+    <div class="opt correct"><span class="label">B.</span> 4194304</div>
+    <div class="opt"><span class="label">C.</span> 4096</div>
+    <div class="opt"><span class="label">D.</span> 400000</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">144. To enable file uploads in PHP, which directive must be set to "On" in php.ini?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> allow_uploads</div>
+    <div class="opt correct"><span class="label">B.</span> file_uploads</div>
+    <div class="opt"><span class="label">C.</span> upload_enabled</div>
+    <div class="opt"><span class="label">D.</span> enable_files</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q145 to Q148</span><br>
+  <strong>Adnan</strong> is learning to use PHP associative arrays to store student records. He iterates through the data and prints formatted output.
+</div>
+
+<div class="question-block">
+  <div class="q-text">145. Adnan writes: <code>$student = array("name"=>"Ali","gpa"=>3.5); echo $student["gpa"];</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Ali</div>
+    <div class="opt correct"><span class="label">B.</span> 3.5</div>
+    <div class="opt"><span class="label">C.</span> "gpa"</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">146. To iterate over an associative array and get both keys and values, Adnan should use:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> for($i=0; $i&lt;count($arr); $i++)</div>
+    <div class="opt correct"><span class="label">B.</span> foreach($arr as $key => $value)</div>
+    <div class="opt"><span class="label">C.</span> while(each($arr))</div>
+    <div class="opt"><span class="label">D.</span> foreach($arr as $value) only</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">147. Adnan calls <code>count(array("a","b","c","d"));</code>. Return value?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 3</div>
+    <div class="opt correct"><span class="label">B.</span> 4</div>
+    <div class="opt"><span class="label">C.</span> 0</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">148. Adnan wants the FIRST element of array $courses. Which function?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> reset($courses)</div>
+    <div class="opt"><span class="label">B.</span> first($courses)</div>
+    <div class="opt"><span class="label">C.</span> array_first($courses)</div>
+    <div class="opt"><span class="label">D.</span> $courses.first()</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q149 to Q152</span><br>
+  <strong>Rima</strong> is developing a delivery tracking dashboard using AJAX. She wants to fetch delivery status every 10 seconds and update the UI without refreshing the page.
+</div>
+
+<div class="question-block">
+  <div class="q-text">149. The main advantage of AJAX in Rima's dashboard is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The server processes faster</div>
+    <div class="opt correct"><span class="label">B.</span> Web page content can update without a full page reload</div>
+    <div class="opt"><span class="label">C.</span> It replaces PHP entirely</div>
+    <div class="opt"><span class="label">D.</span> It speeds up database queries</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">150. Rima's AJAX callback receives XML. She accesses elements using:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> this.responseText</div>
+    <div class="opt correct"><span class="label">B.</span> this.responseXML and getElementsByTagName()</div>
+    <div class="opt"><span class="label">C.</span> JSON.parse(this.response)</div>
+    <div class="opt"><span class="label">D.</span> this.xmlData</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">151. To abort/cancel an in-progress AJAX request, Rima uses:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> xhttp.abort()</div>
+    <div class="opt"><span class="label">B.</span> xhttp.cancel()</div>
+    <div class="opt"><span class="label">C.</span> xhttp.stop()</div>
+    <div class="opt"><span class="label">D.</span> xhttp.close()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">152. AJAX is described as "data-driven as opposed to":</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Model-driven</div>
+    <div class="opt correct"><span class="label">B.</span> Page-driven</div>
+    <div class="opt"><span class="label">C.</span> Server-driven</div>
+    <div class="opt"><span class="label">D.</span> Event-driven</div>
+  </div>
+</div>
+
+<!-- Q153–Q170 -->
+<div class="scenario">
+  <span class="group-label">Scenario — Q153 to Q156</span><br>
+  <strong>Shirin</strong> builds a library management system using OOP. She creates a Book class with a constructor and getter/setter methods, then creates multiple book objects.
+</div>
+
+<div class="question-block">
+  <div class="q-text">153. Shirin creates a Book object: <code>$b = new Book("PHP Pro", "Smith");</code>. The constructor must receive these parameters. This constructor is called:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Manually after creating the object</div>
+    <div class="opt correct"><span class="label">B.</span> Automatically when the object is created with new</div>
+    <div class="opt"><span class="label">C.</span> Only when explicitly called</div>
+    <div class="opt"><span class="label">D.</span> When the object is destroyed</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">154. A class is best described as:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> A template/blueprint for creating objects</div>
+    <div class="opt"><span class="label">B.</span> A PHP function with a return value</div>
+    <div class="opt"><span class="label">C.</span> A type of PHP array</div>
+    <div class="opt"><span class="label">D.</span> A PHP file that includes other files</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">155. Shirin has <code>class Book { private $title; public function get_title(){return $this->title;} }</code>. Can she directly access <code>$b->title</code> outside the class?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Yes — all properties can be accessed directly</div>
+    <div class="opt correct"><span class="label">B.</span> No — $title is private; must use get_title()</div>
+    <div class="opt"><span class="label">C.</span> Yes — but only with $this->title</div>
+    <div class="opt"><span class="label">D.</span> Yes — but only inside static methods</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">156. The <code>__toString()</code> magic method is called when:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> An object property is set</div>
+    <div class="opt"><span class="label">B.</span> The object is cloned</div>
+    <div class="opt correct"><span class="label">C.</span> The object is used in a string context (e.g., echoed)</div>
+    <div class="opt"><span class="label">D.</span> The object is passed to a function</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q157 to Q160</span><br>
+  <strong>Jahir</strong> builds a news website where articles are stored in JSON files. He writes PHP to read, update, and display news articles dynamically.
+</div>
+
+<div class="question-block">
+  <div class="q-text">157. Jahir writes JSON to a file using: <code>file_put_contents("news.json", $jsonStr);</code>. If news.json already exists, this will:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Append to the file</div>
+    <div class="opt correct"><span class="label">B.</span> Overwrite the existing file</div>
+    <div class="opt"><span class="label">C.</span> Throw an error</div>
+    <div class="opt"><span class="label">D.</span> Create a backup of the original</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">158. JSON is primarily used for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Styling web pages</div>
+    <div class="opt"><span class="label">B.</span> Creating HTML structure</div>
+    <div class="opt correct"><span class="label">C.</span> Transmitting data between web applications and servers</div>
+    <div class="opt"><span class="label">D.</span> Managing server configuration</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">159. Which is a valid JSON data structure?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> {name: John, age: 30}</div>
+    <div class="opt correct"><span class="label">B.</span> {"name":"John","age":30}</div>
+    <div class="opt"><span class="label">C.</span> [name="John", age=30]</div>
+    <div class="opt"><span class="label">D.</span> &lt;name&gt;John&lt;/name&gt;&lt;age&gt;30&lt;/age&gt;</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">160. To add a new article to an existing JSON array in a file, the correct workflow is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> json_encode() → file_put_contents() directly</div>
+    <div class="opt correct"><span class="label">B.</span> file_get_contents() → json_decode() → array_push() → json_encode() → file_put_contents()</div>
+    <div class="opt"><span class="label">C.</span> json_decode() → file_put_contents() directly</div>
+    <div class="opt"><span class="label">D.</span> array_push() → json_decode() → file_put_contents()</div>
+  </div>
+</div>
+
+<!-- Q161–Q180 -->
+<div class="scenario">
+  <span class="group-label">Mixed Advanced Concept Questions — Q161 to Q180</span>
+</div>
+
+<div class="question-block">
+  <div class="q-text">161. What does the jQuery dblclick() event handle?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Single mouse click</div>
+    <div class="opt correct"><span class="label">B.</span> Double mouse click</div>
+    <div class="opt"><span class="label">C.</span> Mouse button held down</div>
+    <div class="opt"><span class="label">D.</span> Right mouse click</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">162. In PHP, the concatenation operator is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> +</div>
+    <div class="opt"><span class="label">B.</span> &amp;&amp;</div>
+    <div class="opt correct"><span class="label">C.</span> .</div>
+    <div class="opt"><span class="label">D.</span> ,</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">163. Which PHP function removes and returns the FIRST element of an array?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> array_shift()</div>
+    <div class="opt"><span class="label">B.</span> array_pop()</div>
+    <div class="opt"><span class="label">C.</span> array_push()</div>
+    <div class="opt"><span class="label">D.</span> reset()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">164. MVC stands for:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Method, Variable, Class</div>
+    <div class="opt correct"><span class="label">B.</span> Model, View, Controller</div>
+    <div class="opt"><span class="label">C.</span> Module, Value, Component</div>
+    <div class="opt"><span class="label">D.</span> Manager, Viewer, Connector</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">165. In PHP, <code>fclose($myfile)</code> is used to:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Close an open file and free associated resources</div>
+    <div class="opt"><span class="label">B.</span> Delete the file from the filesystem</div>
+    <div class="opt"><span class="label">C.</span> Save changes to the file</div>
+    <div class="opt"><span class="label">D.</span> Return the file pointer to the beginning</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">166. Which HTTP status code means "Forbidden" (server understood but refuses)?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 200</div>
+    <div class="opt correct"><span class="label">B.</span> 403</div>
+    <div class="opt"><span class="label">C.</span> 404</div>
+    <div class="opt"><span class="label">D.</span> 500</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">167. In PHP, the <code>readfile()</code> function:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Reads a file and writes it directly to the output buffer</div>
+    <div class="opt"><span class="label">B.</span> Returns the file as a string without output</div>
+    <div class="opt"><span class="label">C.</span> Opens a file for writing</div>
+    <div class="opt"><span class="label">D.</span> Reads only the first line of a file</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">168. The keyword <code>new</code> in PHP OOP is used to:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Define a class</div>
+    <div class="opt correct"><span class="label">B.</span> Create an instance (object) of a class</div>
+    <div class="opt"><span class="label">C.</span> Declare a new variable</div>
+    <div class="opt"><span class="label">D.</span> Import an external class file</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">169. In AJAX, the <code>getAllResponseHeaders()</code> method returns:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Only the Content-Type header</div>
+    <div class="opt correct"><span class="label">B.</span> All header information from the server response</div>
+    <div class="opt"><span class="label">C.</span> The request headers sent to the server</div>
+    <div class="opt"><span class="label">D.</span> The response body as a string</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">170. Which of these is NOT a valid PHP data type?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Boolean</div>
+    <div class="opt"><span class="label">B.</span> Float</div>
+    <div class="opt correct"><span class="label">C.</span> Character</div>
+    <div class="opt"><span class="label">D.</span> Object</div>
+  </div>
+</div>
+
+<!-- Q171–Q200 final batch -->
+<div class="scenario">
+  <span class="group-label">Scenario — Q171 to Q174</span><br>
+  <strong>Mina</strong> is tasked with debugging a colleague's PHP code. The colleague's form submits data but validation keeps failing even for valid inputs.
+</div>
+
+<div class="question-block">
+  <div class="q-text">171. Mina checks the validation function and finds it calls <code>isset($_POST["email"])</code>. This is TRUE when:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_POST["email"] is an empty string</div>
+    <div class="opt correct"><span class="label">B.</span> $_POST["email"] is declared and not NULL</div>
+    <div class="opt"><span class="label">C.</span> The email is valid format</div>
+    <div class="opt"><span class="label">D.</span> The form has been submitted</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">172. Mina's colleague uses <code>$_SERVER["REQUEST_METHOD"] == "POST"</code> to check if the form was submitted. This evaluates to TRUE when:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The page is first loaded via GET</div>
+    <div class="opt correct"><span class="label">B.</span> The form was submitted using HTTP POST method</div>
+    <div class="opt"><span class="label">C.</span> Any form on the page was submitted</div>
+    <div class="opt"><span class="label">D.</span> The URL contains POST as a query parameter</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">173. Mina finds the email validation uses <code>preg_match("/^[a-zA-Z ]*$/", $email)</code>. The BUG is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> preg_match is the wrong function</div>
+    <div class="opt correct"><span class="label">B.</span> This regex is for names, not emails — it won't allow @ or .</div>
+    <div class="opt"><span class="label">C.</span> The regex flags are wrong</div>
+    <div class="opt"><span class="label">D.</span> $email should be trimmed first</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">174. The correct PHP function to validate an email address format is:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> is_email($email)</div>
+    <div class="opt"><span class="label">B.</span> validate_email($email)</div>
+    <div class="opt correct"><span class="label">C.</span> filter_var($email, FILTER_VALIDATE_EMAIL)</div>
+    <div class="opt"><span class="label">D.</span> email_valid($email)</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Scenario — Q175 to Q178</span><br>
+  <strong>Danyal</strong> builds a grade portal. He writes PHP code where students see their grades via a web form, and he uses conditional rendering based on GPA values.
+</div>
+
+<div class="question-block">
+  <div class="q-text">175. Danyal writes: <code>$gpa = 2.7; switch(true){ case ($gpa &gt;= 3.5): echo "A"; break; case ($gpa &gt;= 2.5): echo "B"; break; default: echo "C"; }</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> A</div>
+    <div class="opt correct"><span class="label">B.</span> B</div>
+    <div class="opt"><span class="label">C.</span> C</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">176. Danyal wants an array to store GPA values for 5 students and compute their average. Best structure?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Indexed array with numeric keys</div>
+    <div class="opt"><span class="label">B.</span> A single variable with all values</div>
+    <div class="opt"><span class="label">C.</span> Five separate variables</div>
+    <div class="opt"><span class="label">D.</span> A string with comma-separated values</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">177. Danyal uses: <code>$a=5; $b=2; echo $a ** $b;</code>. Output?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> 10</div>
+    <div class="opt"><span class="label">B.</span> 7</div>
+    <div class="opt correct"><span class="label">C.</span> 25</div>
+    <div class="opt"><span class="label">D.</span> 52</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">178. In PHP, which operator is used for string concatenation?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> +</div>
+    <div class="opt"><span class="label">B.</span> &amp;</div>
+    <div class="opt correct"><span class="label">C.</span> .</div>
+    <div class="opt"><span class="label">D.</span> ,</div>
+  </div>
+</div>
+
+<div class="scenario">
+  <span class="group-label">Final Questions — Q179 to Q200</span>
+</div>
+
+<div class="question-block">
+  <div class="q-text">179. Which PHP function reads all data from a CSV or text file and returns it as a string?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> file_get_contents()</div>
+    <div class="opt"><span class="label">B.</span> fopen()</div>
+    <div class="opt"><span class="label">C.</span> fread()</div>
+    <div class="opt"><span class="label">D.</span> readall()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">180. Which jQuery event fires when the mouse pointer ENTERS an HTML element?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> mouseenter()</div>
+    <div class="opt"><span class="label">B.</span> mousedown()</div>
+    <div class="opt"><span class="label">C.</span> mousein()</div>
+    <div class="opt"><span class="label">D.</span> mouseover_enter()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">181. PHP scripts are executed on the:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Client browser</div>
+    <div class="opt correct"><span class="label">B.</span> Web server</div>
+    <div class="opt"><span class="label">C.</span> Database server only</div>
+    <div class="opt"><span class="label">D.</span> FTP server</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">182. Which of the following is the correct PHP syntax for a multi-line comment?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> // This is a comment //</div>
+    <div class="opt correct"><span class="label">B.</span> /* This is a comment */</div>
+    <div class="opt"><span class="label">C.</span> &lt;!-- This is a comment --&gt;</div>
+    <div class="opt"><span class="label">D.</span> ## This is a comment ##</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">183. In AJAX, asynchronous means:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The request always fails</div>
+    <div class="opt correct"><span class="label">B.</span> JavaScript can continue running while waiting for the server response</div>
+    <div class="opt"><span class="label">C.</span> The browser is blocked until response arrives</div>
+    <div class="opt"><span class="label">D.</span> The request is encrypted</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">184. Which PHP function returns the number of elements in an array?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> size()</div>
+    <div class="opt"><span class="label">B.</span> length()</div>
+    <div class="opt correct"><span class="label">C.</span> count()</div>
+    <div class="opt"><span class="label">D.</span> num_elements()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">185. The main purpose of jQuery <code>$(document).ready()</code> is to:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Load jQuery from CDN</div>
+    <div class="opt correct"><span class="label">B.</span> Execute code only after the HTML document is fully loaded</div>
+    <div class="opt"><span class="label">C.</span> Submit a form automatically</div>
+    <div class="opt"><span class="label">D.</span> Prevent page scrolling</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">186. A PHP variable name is valid if it:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Starts with a number followed by letters</div>
+    <div class="opt correct"><span class="label">B.</span> Starts with $ followed by a letter or underscore</div>
+    <div class="opt"><span class="label">C.</span> Contains spaces between words</div>
+    <div class="opt"><span class="label">D.</span> Is written in all uppercase</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">187. The PHP <code>$_SERVER</code> superglobal holds information about:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Headers, paths, and script locations</div>
+    <div class="opt"><span class="label">B.</span> Form data submitted via POST</div>
+    <div class="opt"><span class="label">C.</span> Session variables</div>
+    <div class="opt"><span class="label">D.</span> Cookie values only</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">188. Which function is used to write data to an open file in PHP?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> fread()</div>
+    <div class="opt correct"><span class="label">B.</span> fwrite()</div>
+    <div class="opt"><span class="label">C.</span> fputs()</div>
+    <div class="opt"><span class="label">D.</span> fprintf()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">189. What does <code>JSON.parse()</code> do in JavaScript?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Converts a JavaScript object to a JSON string</div>
+    <div class="opt correct"><span class="label">B.</span> Converts a JSON string to a JavaScript object</div>
+    <div class="opt"><span class="label">C.</span> Validates JSON format</div>
+    <div class="opt"><span class="label">D.</span> Encodes data for URL transmission</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">190. Which PHP function reads XML data from a file into a SimpleXMLElement object?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> simplexml_load_file()</div>
+    <div class="opt"><span class="label">B.</span> xml_read_file()</div>
+    <div class="opt"><span class="label">C.</span> load_xml()</div>
+    <div class="opt"><span class="label">D.</span> fopen_xml()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">191. The GET method appends form data:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> To the URL as query parameters</div>
+    <div class="opt"><span class="label">B.</span> Inside the HTTP request body</div>
+    <div class="opt"><span class="label">C.</span> In a cookie</div>
+    <div class="opt"><span class="label">D.</span> In the HTTP header</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">192. Which PHP function checks if a variable is an array?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> is_array()</div>
+    <div class="opt"><span class="label">B.</span> array_check()</div>
+    <div class="opt"><span class="label">C.</span> typeof_array()</div>
+    <div class="opt"><span class="label">D.</span> check_array()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">193. In PHP OOP, the access modifier that allows a property to be accessed from anywhere (inside or outside the class) is:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> public</div>
+    <div class="opt"><span class="label">B.</span> private</div>
+    <div class="opt"><span class="label">C.</span> protected</div>
+    <div class="opt"><span class="label">D.</span> static</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">194. Which XMLHttpRequest method returns specific header information from the server response?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> getResponseHeader()</div>
+    <div class="opt"><span class="label">B.</span> setRequestHeader()</div>
+    <div class="opt"><span class="label">C.</span> readHeader()</div>
+    <div class="opt"><span class="label">D.</span> fetchHeader()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">195. In a PHP switch statement, the <code>default</code> block:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Must always be the first case</div>
+    <div class="opt correct"><span class="label">B.</span> Runs when no other case matches</div>
+    <div class="opt"><span class="label">C.</span> Is required in every switch statement</div>
+    <div class="opt"><span class="label">D.</span> Only runs when the variable is null</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">196. To include a jQuery library from Google CDN in an HTML file, Hamza writes inside &lt;head&gt;:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"&gt;&lt;/script&gt;</div>
+    <div class="opt"><span class="label">B.</span> &lt;link rel="jquery" href="jquery.min.js"&gt;</div>
+    <div class="opt"><span class="label">C.</span> &lt;import jquery from google&gt;</div>
+    <div class="opt"><span class="label">D.</span> &lt;php include "jquery";&gt;</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">197. PHP's <code>echo</code> vs <code>print</code>: which statement is TRUE?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> print has no return value</div>
+    <div class="opt correct"><span class="label">B.</span> echo has no return value; print returns 1</div>
+    <div class="opt"><span class="label">C.</span> Both have return value of 0</div>
+    <div class="opt"><span class="label">D.</span> echo can only print integers</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">198. In PHP, to open a file for read/write where the pointer starts at the BEGINNING and existing data is PRESERVED, use mode:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> r+</div>
+    <div class="opt"><span class="label">B.</span> w+</div>
+    <div class="opt"><span class="label">C.</span> a+</div>
+    <div class="opt"><span class="label">D.</span> x+</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">199. Which jQuery event fires when a form field RECEIVES focus?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> focus()</div>
+    <div class="opt"><span class="label">B.</span> blur()</div>
+    <div class="opt"><span class="label">C.</span> click()</div>
+    <div class="opt"><span class="label">D.</span> change()</div>
+  </div>
+</div>
+
+<div class="question-block">
+  <div class="q-text">200. Which PHP construct is used when you want the script to STOP completely if a required file is missing?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> include</div>
+    <div class="opt correct"><span class="label">B.</span> require</div>
+    <div class="opt"><span class="label">C.</span> import</div>
+    <div class="opt"><span class="label">D.</span> load_or_die</div>
+  </div>
+</div>
+
+<!-- ANSWER KEY -->
+<div class="answer-key">
+  <h3>📋 Answer Key</h3>
+  <div class="key-grid">
+    <div class="key-item">1. <span>B</span></div><div class="key-item">2. <span>B</span></div><div class="key-item">3. <span>C</span></div><div class="key-item">4. <span>C</span></div>
+    <div class="key-item">5. <span>C</span></div><div class="key-item">6. <span>A</span></div><div class="key-item">7. <span>B</span></div><div class="key-item">8. <span>C</span></div>
+    <div class="key-item">9. <span>B</span></div><div class="key-item">10. <span>A</span></div><div class="key-item">11. <span>B</span></div><div class="key-item">12. <span>B</span></div>
+    <div class="key-item">13. <span>A</span></div><div class="key-item">14. <span>C</span></div><div class="key-item">15. <span>C</span></div><div class="key-item">16. <span>B</span></div>
+    <div class="key-item">17. <span>B</span></div><div class="key-item">18. <span>D</span></div><div class="key-item">19. <span>B</span></div><div class="key-item">20. <span>C</span></div>
+    <div class="key-item">21. <span>B</span></div><div class="key-item">22. <span>B</span></div><div class="key-item">23. <span>B</span></div><div class="key-item">24. <span>B</span></div>
+    <div class="key-item">25. <span>B</span></div><div class="key-item">26. <span>C</span></div><div class="key-item">27. <span>C</span></div><div class="key-item">28. <span>C</span></div>
+    <div class="key-item">29. <span>C</span></div><div class="key-item">30. <span>B</span></div><div class="key-item">31. <span>B</span></div><div class="key-item">32. <span>B</span></div>
+    <div class="key-item">33. <span>C</span></div><div class="key-item">34. <span>C</span></div><div class="key-item">35. <span>A</span></div><div class="key-item">36. <span>C</span></div>
+    <div class="key-item">37. <span>C</span></div><div class="key-item">38. <span>B</span></div><div class="key-item">39. <span>B</span></div><div class="key-item">40. <span>B</span></div>
+    <div class="key-item">41. <span>A</span></div><div class="key-item">42. <span>D</span></div><div class="key-item">43. <span>A</span></div><div class="key-item">44. <span>D</span></div>
+    <div class="key-item">45. <span>C</span></div><div class="key-item">46. <span>B</span></div><div class="key-item">47. <span>B</span></div><div class="key-item">48. <span>B</span></div>
+    <div class="key-item">49. <span>B</span></div><div class="key-item">50. <span>C</span></div><div class="key-item">51. <span>B</span></div><div class="key-item">52. <span>B</span></div>
+    <div class="key-item">53. <span>A</span></div><div class="key-item">54. <span>B</span></div><div class="key-item">55. <span>B</span></div><div class="key-item">56. <span>B</span></div>
+    <div class="key-item">57. <span>C</span></div><div class="key-item">58. <span>C</span></div><div class="key-item">59. <span>B</span></div><div class="key-item">60. <span>D</span></div>
+    <div class="key-item">61. <span>B</span></div><div class="key-item">62. <span>B</span></div><div class="key-item">63. <span>B</span></div><div class="key-item">64. <span>B</span></div>
+    <div class="key-item">65. <span>C</span></div><div class="key-item">66. <span>C</span></div><div class="key-item">67. <span>B</span></div><div class="key-item">68. <span>A</span></div>
+    <div class="key-item">69. <span>B</span></div><div class="key-item">70. <span>C</span></div><div class="key-item">71. <span>B</span></div><div class="key-item">72. <span>C</span></div>
+    <div class="key-item">73. <span>B</span></div><div class="key-item">74. <span>A</span></div><div class="key-item">75. <span>C</span></div><div class="key-item">76. <span>B</span></div>
+    <div class="key-item">77. <span>C</span></div><div class="key-item">78. <span>B</span></div><div class="key-item">79. <span>C</span></div><div class="key-item">80. <span>A</span></div>
+    <div class="key-item">81. <span>B</span></div><div class="key-item">82. <span>B</span></div><div class="key-item">83. <span>B</span></div><div class="key-item">84. <span>A</span></div>
+    <div class="key-item">85. <span>A</span></div><div class="key-item">86. <span>B</span></div><div class="key-item">87. <span>A</span></div><div class="key-item">88. <span>C</span></div>
+    <div class="key-item">89. <span>B</span></div><div class="key-item">90. <span>B</span></div><div class="key-item">91. <span>A</span></div><div class="key-item">92. <span>B</span></div>
+    <div class="key-item">93. <span>A</span></div><div class="key-item">94. <span>B</span></div><div class="key-item">95. <span>C</span></div><div class="key-item">96. <span>B</span></div>
+    <div class="key-item">97. <span>C</span></div><div class="key-item">98. <span>C</span></div><div class="key-item">99. <span>B</span></div><div class="key-item">100. <span>B</span></div>
+    <div class="key-item">101. <span>B</span></div><div class="key-item">102. <span>A</span></div><div class="key-item">103. <span>A</span></div><div class="key-item">104. <span>A</span></div>
+    <div class="key-item">105. <span>B</span></div><div class="key-item">106. <span>B</span></div><div class="key-item">107. <span>C</span></div><div class="key-item">108. <span>A</span></div>
+    <div class="key-item">109. <span>C</span></div><div class="key-item">110. <span>A</span></div><div class="key-item">111. <span>B</span></div><div class="key-item">112. <span>C</span></div>
+    <div class="key-item">113. <span>A</span></div><div class="key-item">114. <span>C</span></div><div class="key-item">115. <span>B</span></div><div class="key-item">116. <span>C</span></div>
+    <div class="key-item">117. <span>B</span></div><div class="key-item">118. <span>B</span></div><div class="key-item">119. <span>A</span></div><div class="key-item">120. <span>D</span></div>
+    <div class="key-item">121. <span>A</span></div><div class="key-item">122. <span>B</span></div><div class="key-item">123. <span>B</span></div><div class="key-item">124. <span>B</span></div>
+    <div class="key-item">125. <span>C</span></div><div class="key-item">126. <span>B</span></div><div class="key-item">127. <span>B</span></div><div class="key-item">128. <span>B</span></div>
+    <div class="key-item">129. <span>B</span></div><div class="key-item">130. <span>A</span></div><div class="key-item">131. <span>B</span></div><div class="key-item">132. <span>A</span></div>
+    <div class="key-item">133. <span>C</span></div><div class="key-item">134. <span>B</span></div><div class="key-item">135. <span>C</span></div><div class="key-item">136. <span>B</span></div>
+    <div class="key-item">137. <span>B</span></div><div class="key-item">138. <span>B</span></div><div class="key-item">139. <span>B</span></div><div class="key-item">140. <span>B</span></div>
+    <div class="key-item">141. <span>B</span></div><div class="key-item">142. <span>C</span></div><div class="key-item">143. <span>B</span></div><div class="key-item">144. <span>B</span></div>
+    <div class="key-item">145. <span>B</span></div><div class="key-item">146. <span>B</span></div><div class="key-item">147. <span>B</span></div><div class="key-item">148. <span>A</span></div>
+    <div class="key-item">149. <span>B</span></div><div class="key-item">150. <span>B</span></div><div class="key-item">151. <span>A</span></div><div class="key-item">152. <span>B</span></div>
+    <div class="key-item">153. <span>B</span></div><div class="key-item">154. <span>A</span></div><div class="key-item">155. <span>B</span></div><div class="key-item">156. <span>C</span></div>
+    <div class="key-item">157. <span>B</span></div><div class="key-item">158. <span>C</span></div><div class="key-item">159. <span>B</span></div><div class="key-item">160. <span>B</span></div>
+    <div class="key-item">161. <span>B</span></div><div class="key-item">162. <span>C</span></div><div class="key-item">163. <span>A</span></div><div class="key-item">164. <span>B</span></div>
+    <div class="key-item">165. <span>A</span></div><div class="key-item">166. <span>B</span></div><div class="key-item">167. <span>A</span></div><div class="key-item">168. <span>B</span></div>
+    <div class="key-item">169. <span>B</span></div><div class="key-item">170. <span>C</span></div><div class="key-item">171. <span>B</span></div><div class="key-item">172. <span>B</span></div>
+    <div class="key-item">173. <span>B</span></div><div class="key-item">174. <span>C</span></div><div class="key-item">175. <span>B</span></div><div class="key-item">176. <span>A</span></div>
+    <div class="key-item">177. <span>C</span></div><div class="key-item">178. <span>C</span></div><div class="key-item">179. <span>A</span></div><div class="key-item">180. <span>A</span></div>
+    <div class="key-item">181. <span>B</span></div><div class="key-item">182. <span>B</span></div><div class="key-item">183. <span>B</span></div><div class="key-item">184. <span>C</span></div>
+    <div class="key-item">185. <span>B</span></div><div class="key-item">186. <span>B</span></div><div class="key-item">187. <span>A</span></div><div class="key-item">188. <span>B</span></div>
+    <div class="key-item">189. <span>B</span></div><div class="key-item">190. <span>A</span></div><div class="key-item">191. <span>A</span></div><div class="key-item">192. <span>A</span></div>
+    <div class="key-item">193. <span>A</span></div><div class="key-item">194. <span>A</span></div><div class="key-item">195. <span>B</span></div><div class="key-item">196. <span>A</span></div>
+    <div class="key-item">197. <span>B</span></div><div class="key-item">198. <span>A</span></div><div class="key-item">199. <span>A</span></div><div class="key-item">200. <span>B</span></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ════════════════════════════════════════════
+     EXAM MCQ SOLUTIONS (from uploaded PDF exam paper)
+════════════════════════════════════════════ -->
+<div class="container">
+<div class="divider"></div>
+
+<div class="mcq-hero" style="background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%); border-color: #f0883e;">
+  <h2 style="color:#f0883e;">📝 Exam Paper MCQ Solutions</h2>
+  <p>Original 20 questions from the uploaded exam paper — with full question text &amp; explained answers</p>
+</div>
+
+<!-- Q1 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">1. The <code>$_REQUEST</code> superglobal typically contains the contents of ________</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_GET and $_POST only</div>
+    <div class="opt correct"><span class="label">B.</span> $_GET, $_POST, and $_COOKIE</div>
+    <div class="opt"><span class="label">C.</span> $_SESSION</div>
+    <div class="opt"><span class="label">D.</span> $_FILES and $_ENV</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — <code>$_REQUEST</code> is a superglobal that by default contains the combined contents of <code>$_GET</code>, <code>$_POST</code>, and <code>$_COOKIE</code>. It allows you to collect data from both GET and POST form submissions as well as cookies using a single variable.
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">2. Which function removes all session variables but does not destroy the session itself?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> session_destroy()</div>
+    <div class="opt correct"><span class="label">B.</span> session_unset()</div>
+    <div class="opt"><span class="label">C.</span> unset($_SESSION)</div>
+    <div class="opt"><span class="label">D.</span> clearstatcache()</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — <code>session_unset()</code> frees all session variables currently registered (clears <code>$_SESSION</code> array) but keeps the session active. <code>session_destroy()</code> completely destroys the session. You typically call both when logging a user out.
+  </div>
+</div>
+
+<!-- Scenario intro Q3-6 -->
+<div class="scenario" style="margin-top:28px;">
+  <span class="group-label">Scenario — Questions 3 to 6</span><br>
+  The <strong>"Sweet Loaf"</strong> bakery's new website has a page for submitting cupcake recipes. The form is set up to send the data to <code>upload.php</code>, and the text fields for the recipe name and description work perfectly. However, when customers try to submit a photo of their creation, the server receives no file data, leaving the image upload feature broken.
+</div>
+
+<!-- Q3 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">3. What is the most likely cause of this problem?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The file input element is missing the required attribute</div>
+    <div class="opt correct"><span class="label">B.</span> The form is missing the <code>enctype="multipart/form-data"</code> attribute</div>
+    <div class="opt"><span class="label">C.</span> The server's PHP configuration has file_uploads set to Off</div>
+    <div class="opt"><span class="label">D.</span> The form's method="post" attribute is incorrect</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — Without <code>enctype="multipart/form-data"</code> in the form tag, file data is NOT transmitted to the server — only text field data is sent. This is the most common and classic cause of broken file uploads. Text fields work because the default encoding (<code>application/x-www-form-urlencoded</code>) handles them fine.
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">4. Once the form is fixed, the uploaded image will first be placed in:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> A folder named /tmp/ on the server's root</div>
+    <div class="opt"><span class="label">B.</span> The same directory as the upload.php script</div>
+    <div class="opt correct"><span class="label">C.</span> PHP server temp storage</div>
+    <div class="opt"><span class="label">D.</span> A special database table for file storage</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: C</strong> — PHP automatically places uploaded files in a temporary server storage location first (configured via <code>upload_tmp_dir</code> in php.ini). The path to this temp file is available via <code>$_FILES['field']['tmp_name']</code>. You must use <code>move_uploaded_file()</code> to move it to a permanent location.
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">5. The server-side script will find details about the uploaded image, like its original name and size, in which PHP superglobal?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_POST</div>
+    <div class="opt"><span class="label">B.</span> $_GET</div>
+    <div class="opt correct"><span class="label">C.</span> $_FILES</div>
+    <div class="opt"><span class="label">D.</span> $_REQUEST</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: C</strong> — <code>$_FILES</code> is the dedicated superglobal for file uploads. It contains keys: <code>['name']</code> (original filename), <code>['type']</code> (MIME type), <code>['size']</code> (bytes), <code>['tmp_name']</code> (temp path), and <code>['error']</code> (error code).
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">6. To securely save the file to a public gallery folder, the script must:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Use copy() on $_FILES['image']['name']</div>
+    <div class="opt"><span class="label">B.</span> Check ['type'] then use fwrite()</div>
+    <div class="opt correct"><span class="label">C.</span> Use move_uploaded_file() on $_FILES['image']['tmp_name']</div>
+    <div class="opt"><span class="label">D.</span> Read $_POST['image'] and save as file</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: C</strong> — <code>move_uploaded_file($_FILES['image']['tmp_name'], $destination)</code> is the correct and SECURE way. It validates that the file was genuinely uploaded via HTTP POST (preventing attacks) and then moves it from temp storage to the final destination. Using <code>copy()</code> or <code>fwrite()</code> bypasses these security checks.
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">7. What will be the output of the following code? <code>$str = "hello"; echo $str[-1];</code></div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> h</div>
+    <div class="opt correct"><span class="label">B.</span> o</div>
+    <div class="opt"><span class="label">C.</span> Error</div>
+    <div class="opt"><span class="label">D.</span> Null</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — PHP (since version 7.1) supports negative string indexing. <code>$str[-1]</code> accesses the LAST character of the string. The string "hello" has characters: h(0), e(1), l(2), l(3), o(4), so <code>$str[-1]</code> → <strong>"o"</strong>.
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">8. In a sorting algorithm tester, <code>$nums = array(3,1,4); sort($nums); echo implode(',', $nums);</code> What will be the output?</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> 1,3,4</div>
+    <div class="opt"><span class="label">B.</span> 3,1,4</div>
+    <div class="opt"><span class="label">C.</span> 4,3,1</div>
+    <div class="opt"><span class="label">D.</span> Error</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: A</strong> — <code>sort()</code> sorts the array in ascending order (lowest to highest) and modifies it in-place. So array(3,1,4) becomes array(1,3,4). Then <code>implode(',', $nums)</code> joins with commas → <strong>"1,3,4"</strong>.
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">9. For an e-commerce cart, you want to add a new item to the END of <code>$cart = ['shirt', 'hat'];</code>. Which function achieves this?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> array_insert()</div>
+    <div class="opt correct"><span class="label">B.</span> array_push()</div>
+    <div class="opt"><span class="label">C.</span> array_add()</div>
+    <div class="opt"><span class="label">D.</span> array_addAtEnd()</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — <code>array_push($cart, 'shoes')</code> pushes one or more elements onto the END of an array. Equivalently you can write <code>$cart[] = 'shoes';</code>. Options A, C, and D are not real PHP functions.
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">10. You need to check if a string <code>$email</code> contains the "@" character. Which function is most suitable?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> strcmp()</div>
+    <div class="opt correct"><span class="label">B.</span> strpos()</div>
+    <div class="opt"><span class="label">C.</span> strstr()</div>
+    <div class="opt"><span class="label">D.</span> substr()</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — <code>strpos($email, "@")</code> returns the position of "@" if found, or <code>false</code> if not. It is the most efficient and idiomatic way to check for a substring. Note: use strict comparison (<code>!== false</code>) since position 0 would be falsy. <code>strcmp()</code> compares two strings; <code>substr()</code> extracts a portion.
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">11. A PHP script receives this URL <code>http://localhost/wt/welcome.php?key=xyz</code>. Which of the following syntax can be used to retrieve the query value?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> $_GET['key']</div>
+    <div class="opt"><span class="label">B.</span> $_POST['key']</div>
+    <div class="opt"><span class="label">C.</span> $_REQUEST['key']</div>
+    <div class="opt correct"><span class="label">D.</span> Both A &amp; C</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: D</strong> — URL query parameters (like <code>?key=xyz</code>) are accessible via <code>$_GET['key']</code> AND via <code>$_REQUEST['key']</code> (since $_REQUEST merges $_GET, $_POST, and $_COOKIE). <code>$_POST['key']</code> only works for data sent in the HTTP body via POST method.
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">12. In PHP, if a cookie is set without specifying an expiration time, what will happen?</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> The cookie will be stored permanently until manually deleted</div>
+    <div class="opt correct"><span class="label">B.</span> The cookie will last only for the current browser session</div>
+    <div class="opt"><span class="label">C.</span> The cookie will expire immediately</div>
+    <div class="opt"><span class="label">D.</span> The cookie will default to a 24-hour expiration time</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — When <code>setcookie("name","value")</code> is called without an expiry, PHP sets no expiry date on the cookie. The browser treats this as a <strong>session cookie</strong> — it disappears when the browser is closed. To make a cookie persist, you must set an explicit expiry: e.g., <code>time() + (86400 * 30)</code>.
+  </div>
+</div>
+
+<!-- Scenario Q13-16 -->
+<div class="scenario" style="margin-top:28px;">
+  <span class="group-label">Scenario — Questions 13 to 16</span><br>
+  A student asks the librarian for their issued books list. The librarian goes inside, checks the records, writes the titles neatly on a slip, and hands it to the student. The student sees the list immediately, without filling another form. Later, the records room is locked, and no one can fetch lists until it's opened again.
+</div>
+
+<!-- Q13 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">13. The librarian quietly checking the records best represents:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Background request (server-side processing)</div>
+    <div class="opt"><span class="label">B.</span> Styling the page</div>
+    <div class="opt"><span class="label">C.</span> Static content</div>
+    <div class="opt"><span class="label">D.</span> Client cache</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: A</strong> — The librarian checking records "in the background" without the student doing anything extra perfectly mirrors a <strong>background/AJAX request</strong> to the server. The student (browser/user) doesn't see the internal process — just receives the result. This is the essence of server-side processing hidden from the user.
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">14. The slip with the book titles represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Static HTML page</div>
+    <div class="opt"><span class="label">B.</span> User interface design</div>
+    <div class="opt"><span class="label">C.</span> Database schema</div>
+    <div class="opt correct"><span class="label">D.</span> Response data</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: D</strong> — The slip is the tangible output handed to the student — this represents the <strong>server response data</strong> (e.g., JSON or HTML) returned to the browser/client after the server processes the request.
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">15. The librarian preparing the slip from the records represents:</div>
+  <div class="options">
+    <div class="opt correct"><span class="label">A.</span> Server-side processing</div>
+    <div class="opt"><span class="label">B.</span> CSS styling</div>
+    <div class="opt"><span class="label">C.</span> Client validation</div>
+    <div class="opt"><span class="label">D.</span> JavaScript events</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: A</strong> — The librarian actively preparing/compiling the slip from the records room is a direct analogy for <strong>server-side processing</strong> — the server queries a database, processes the data, and formats a response to send back to the client.
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">16. The locked records room illustrates:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Optional styling</div>
+    <div class="opt"><span class="label">B.</span> Client-side error</div>
+    <div class="opt"><span class="label">C.</span> Browser issue</div>
+    <div class="opt correct"><span class="label">D.</span> Server dependency</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: D</strong> — A locked records room means NO requests can be fulfilled — this mirrors a <strong>server/database dependency failure</strong>. When the server or database goes down, no data can be fetched regardless of what the client does. The system is completely dependent on this back-end resource being available.
+  </div>
+</div>
+
+<!-- Scenario Q17-20 -->
+<div class="scenario" style="margin-top:28px;">
+  <span class="group-label">Scenario — Questions 17 to 20</span><br>
+  A customer walks into a restaurant and tells the waiter, "I'd like to see today's dessert menu." The waiter goes to the kitchen's order board, checks the list of available desserts (which the chef updates from a <strong>recipe book</strong>), writes them neatly on a small card, and gives it to the customer. The customer reads the card and chooses "chocolate cake." The waiter takes this choice to the chef, who prepares the cake using the recipe book. The waiter then brings the cake to the customer. Later, the recipe book is misplaced, so no one can prepare any dessert until it is found again.
+</div>
+
+<!-- Q17 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">17. The recipe book that stores dessert recipes and availability best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> View</div>
+    <div class="opt"><span class="label">B.</span> Controller</div>
+    <div class="opt correct"><span class="label">C.</span> Model</div>
+    <div class="opt"><span class="label">D.</span> Router</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: C</strong> — In MVC, the <strong>Model</strong> manages the application's data and business rules — it stores, retrieves, and manipulates data (like a database). The recipe book is the central data store that defines what exists and how things work, just like the Model layer. Without it, nothing can be served.
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">18. The waiter writing the dessert list on a small card for the customer best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Model updating</div>
+    <div class="opt correct"><span class="label">B.</span> View rendering</div>
+    <div class="opt"><span class="label">C.</span> Controller logic</div>
+    <div class="opt"><span class="label">D.</span> Database query</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — The waiter <em>presenting</em> information neatly on a card for the customer to read is the <strong>View</strong>. In MVC, the View is responsible for the user-facing presentation — taking data from the Model (via Controller) and displaying it in a human-readable format (HTML/CSS).
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">19. The waiter taking the customer's order and telling the chef to prepare the cake best represents:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Front-end styling</div>
+    <div class="opt correct"><span class="label">B.</span> Controller handling input</div>
+    <div class="opt"><span class="label">C.</span> Model validation</div>
+    <div class="opt"><span class="label">D.</span> Static HTML</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — The waiter acts as the <strong>Controller</strong>: they receive user input (the order), interpret it, and coordinate between the View (the customer) and the Model (the recipe book/chef). The Controller intercepts requests and directs the appropriate actions — it is the mediator in MVC.
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="question-block" style="border-left: 3px solid #f0883e;">
+  <div class="q-text">20. The misplaced recipe book (preventing dessert preparation) best illustrates:</div>
+  <div class="options">
+    <div class="opt"><span class="label">A.</span> Client-side error</div>
+    <div class="opt correct"><span class="label">B.</span> Model/data unavailability</div>
+    <div class="opt"><span class="label">C.</span> View failure</div>
+    <div class="opt"><span class="label">D.</span> CSS issue</div>
+  </div>
+  <div style="margin-top:12px; padding:10px 14px; background:#0d1117; border-radius:6px; font-size:13px; color:#8b949e; border-left:2px solid #3fb950;">
+    <strong style="color:#3fb950;">✔ Answer: B</strong> — When the recipe book (Model / data source) is missing, the entire system fails regardless of how good the waiter (Controller) or the menu card (View) is. This illustrates <strong>Model/data unavailability</strong> — a database or data-source failure that prevents the application from functioning. It underscores why the Model is critical in MVC.
+  </div>
+</div>
+
+<!-- Summary table -->
+<div class="answer-key" style="margin-top:40px;">
+  <h3>📋 Exam Paper — Quick Answer Summary</h3>
+  <div class="key-grid">
+    <div class="key-item">1. <span>B</span></div>
+    <div class="key-item">2. <span>B</span></div>
+    <div class="key-item">3. <span>B</span></div>
+    <div class="key-item">4. <span>C</span></div>
+    <div class="key-item">5. <span>C</span></div>
+    <div class="key-item">6. <span>C</span></div>
+    <div class="key-item">7. <span>B</span></div>
+    <div class="key-item">8. <span>A</span></div>
+    <div class="key-item">9. <span>B</span></div>
+    <div class="key-item">10. <span>B</span></div>
+    <div class="key-item">11. <span>D</span></div>
+    <div class="key-item">12. <span>B</span></div>
+    <div class="key-item">13. <span>A</span></div>
+    <div class="key-item">14. <span>D</span></div>
+    <div class="key-item">15. <span>A</span></div>
+    <div class="key-item">16. <span>D</span></div>
+    <div class="key-item">17. <span>C</span></div>
+    <div class="key-item">18. <span>B</span></div>
+    <div class="key-item">19. <span>B</span></div>
+    <div class="key-item">20. <span>B</span></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  PHP Web Technologies — Complete Notes &amp; 200 MCQs &nbsp;|&nbsp; CSC 3215 / CSC 3222 &nbsp;|&nbsp; All 18 Topics Covered &nbsp;|&nbsp; + Exam Paper 20 MCQ Solutions
+</footer>
+
+</body>
+</html>
