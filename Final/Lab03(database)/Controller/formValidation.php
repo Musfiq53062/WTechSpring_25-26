@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = htmlspecialchars(trim($_POST["comment"] ?? ""));
     $gender = $_POST["gender"] ?? "";
 
-    $file = $_FILES["file"];
     $valid = true;
 
     // Validation
