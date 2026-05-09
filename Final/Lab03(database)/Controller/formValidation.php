@@ -9,7 +9,6 @@ $datafile = "../data.json";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Sanitize input
     $name = $_POST["name"];
     $email = $_POST["email"];
     $website = $_POST["website"];
