@@ -10,10 +10,10 @@ $datafile = "../data.json";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Sanitize input
-    $name = htmlspecialchars(trim($_POST["name"] ?? ""));
-    $email = htmlspecialchars(trim($_POST["email"] ?? ""));
-    $website = htmlspecialchars(trim($_POST["website"] ?? ""));
-    $comment = htmlspecialchars(trim($_POST["comment"] ?? ""));
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $website = $_POST["website"];
+    $comment = $_POST["comment"];
     $gender = $_POST["gender"] ?? "";
 
     $valid = true;
